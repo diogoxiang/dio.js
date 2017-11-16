@@ -1,0 +1,25 @@
+{
+  "name": "dio.js",
+  "version": "1.0.0",
+  "description": "common js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diogoxiang/dio.js.git"
+  },
+  "keywords": ["dio", "common", "js"],
+  "author": "diogoxiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diogoxiang/dio.js/issues"
+  },
+  "homepage": "https://github.com/diogoxiang/dio.js#readme",
+  "devDependencies": {
+    "rollup-plugin-json": "^2.3.0",
+    "tap": "^10.7.3"
+  }
+}
