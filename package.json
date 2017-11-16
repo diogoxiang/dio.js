@@ -5,18 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp",
+    "dev": "rollup -c -w",
     "build": "rollup -c"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/diogoxiang/dio.js.git"
   },
-  "keywords": [
-    "dio",
-    "common",
-    "js"
-  ],
+  "keywords": ["dio", "common", "js"],
   "author": "diogoxiang",
   "license": "ISC",
   "bugs": {
@@ -29,6 +25,7 @@
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-license": "^0.5.0",
     "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.3.1",
     "tap": "^10.7.3",
     "uglify-es": "^3.1.9"
   },

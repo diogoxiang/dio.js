@@ -20,5 +20,6 @@ cnpm isntall rollup-plugin-uglify --save-dev
 cnpm isntall  uglify-es --save-dev
 
 cnpm isntall   rollup-plugin-license  --save-dev
+cnpm install --save-dev rollup-watch
 ## 参考
 - common https://github.com/metarhia/common
