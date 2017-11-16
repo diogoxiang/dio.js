@@ -1,15 +1,5 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.dioLibrary = factory());
-}(this, (function () { 'use strict';
+/**
+ * Copyright Diogo 2017
+ */
 
-var version = "1.0.0";
-
-var index = function() {
-  console.log("version " + version);
-};
-
-return index;
-
-})));
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dio=t()}(this,function(){"use strict";return{ver:"1.0.2",Time:Object.freeze({weWant:function(){console.log("we want this")}})}});

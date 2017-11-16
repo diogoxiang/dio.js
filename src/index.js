@@ -1,6 +1,8 @@
-import { version } from "../package.json";
-import { isTimeEqual } from "./module/time";
+import * as Time from "./module/string";
 
-module.exports = {
-  isTimeEqual
+const index = {
+  ver: "1.0.2", //版本号
+  Time
 };
+
+export default index;
