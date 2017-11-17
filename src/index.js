@@ -1,7 +1,8 @@
-import * as Time from "./module/string";
+import { version } from "../package.json";
+import * as Time from "./module/time";
 
 const index = {
-  ver: "1.0.3", //版本号
+  ver: version, //版本号
   Time
 };
 

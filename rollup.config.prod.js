@@ -20,5 +20,11 @@ export default {
     include: "src/**",
     exclude: "node_modules/**"
   },
-  plugins: [json()]
+  plugins: [
+    json(),
+    uglify({}, minify),
+    license({
+      banner: `Copyright Diogo <%= moment().format('YYYY') %> `
+    })
+  ]
 };

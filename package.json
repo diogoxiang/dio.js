@@ -4,9 +4,9 @@
   "description": "common js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tap test/*.js",
     "dev": "rollup -c -w",
-    "build": "rollup -c"
+    "build": "rollup -c rollup.config.prod.js"
   },
   "repository": {
     "type": "git",
