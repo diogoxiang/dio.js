@@ -1,30 +1,31 @@
-'use strict';
+"use strict";
+// import * as common from "../src/module/array";
 
-const tap = require('tap');
-const common = require('..');
+const tap = require("tap");
+const common = require("../src/module/array");
 
-tap.test('splitAt', (test) => {
+tap.test("splitAt", test => {
   const array = [1, 2, 3, 4, 5];
   const result = common.splitAt(3, array);
   test.strictSame(result, [[1, 2, 3], [4, 5]]);
   test.end();
 });
 
-tap.test('last', (test) => {
+tap.test("last", test => {
   const array = [1, 2, 3, 4, 5];
   const result = common.last(array);
   test.strictSame(result, 5);
   test.end();
 });
 
-tap.test('last single', (test) => {
+tap.test("last single", test => {
   const array = [5];
   const result = common.last(array);
   test.strictSame(result, 5);
   test.end();
 });
 
-tap.test('last empty', (test) => {
+tap.test("last empty", test => {
   const array = [];
   const result = common.last(array);
   test.strictSame(result, undefined);

@@ -48,5 +48,5 @@ export { isTimeEqual, nowDate, nowDateTime };
 // module.exports = {
 //   isTimeEqual,
 //   nowDate,
-//   nowDateTime,
+//   nowDateTime
 // };

@@ -13,7 +13,8 @@ export default {
       //   For Node : cjs
       //   For both browsers and Node.js:
       //  rollup main.js --o bundle.js -f umd --name "myBundle"
-      name: "dio"
+      name: "dio",
+      banner: "/* diogoxiang */"
     }
   ],
   watch: {

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const splitAt = (
   // Splits array into two parts
@@ -15,9 +15,7 @@ const shuffle = (
   // Shuffle an array
   arr // array
   // Returns: array
-) => (
-  arr.sort(() => Math.random() - 0.5)
-);
+) => arr.sort(() => Math.random() - 0.5);
 
 const range = (
   // Generate int array from given range
@@ -64,14 +62,13 @@ const last = (
   // Last array element
   arr // array
   // Returns: element
-) => (
-  arr[arr.length - 1]
-);
+) => arr[arr.length - 1];
 
+// export { splitAt, shuffle, range, sequence, last };
 module.exports = {
   splitAt,
   shuffle,
   range,
   sequence,
-  last,
+  last
 };
