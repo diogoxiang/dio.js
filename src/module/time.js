@@ -44,9 +44,9 @@ const nowDateTime = (
   );
 };
 
-export { isTimeEqual, nowDate, nowDateTime };
-// module.exports = {
-//   isTimeEqual,
-//   nowDate,
-//   nowDateTime
-// };
+// export { isTimeEqual, nowDate, nowDateTime };
+module.exports = {
+  isTimeEqual,
+  nowDate,
+  nowDateTime
+};

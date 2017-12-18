@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const tap = require('tap');
-const common = require('..');
+const tap = require("tap");
+const common = require("../src/module/curryN");
 
-tap.test('curryN', (test) => {
-  const sum = (x, y, z) => (x + y + z);
+tap.test("curryN", test => {
+  const sum = (x, y, z) => x + y + z;
   const sumC = common.curryN(sum, 2, 1);
   const sumC2 = sumC(2);
   const res = sumC2(3);

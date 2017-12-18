@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const util = require('util');
+const util = require("util");
 
 function Cache() {
   const self = new Map();
@@ -51,15 +51,16 @@ Cache.prototype.clr = function(
   });
 };
 
-const cache = (
+const cache = () =>
   // Extend Map interface with:
   // `cache.allocated` - total allocated size
   // `cache.add(key, val)` - add record
   // `cache.del(key)` - delete record
   // `cache.clr(prefix, fn)` - delete all if `key.startsWith(prefix)`
   // Returns: object, cache instance
-) => (new Cache());
+  new Cache();
 
+// export { cache };
 module.exports = {
-  cache,
+  cache
 };

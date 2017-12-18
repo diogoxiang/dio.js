@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-const tap = require('tap');
-const events = require('events');
-const common = require('..');
+const tap = require("tap");
+const events = require("events");
+const common = require("../src/module/events");
 
-tap.test('emitter', (test) => {
+tap.test("emitter", test => {
   const ee = common.emitter();
-  ee.on('name', () => {
+  ee.on("name", () => {
     test.end();
   });
-  ee.emit('name');
+  ee.emit("name");
 });
 
-tap.test('forward all events', (test) => {
+tap.test("forward all events", test => {
   test.plan(3);
 
   const sourceEmitter = common.emitter();
@@ -20,24 +20,24 @@ tap.test('forward all events', (test) => {
 
   common.forwardEvents(sourceEmitter, targetEmitter);
 
-  targetEmitter.on('testEvent1', () => {
-    test.pass('event #1');
+  targetEmitter.on("testEvent1", () => {
+    test.pass("event #1");
   });
 
-  targetEmitter.on('testEvent2', () => {
-    test.pass('event #2');
+  targetEmitter.on("testEvent2", () => {
+    test.pass("event #2");
   });
 
-  targetEmitter.on('testEvent3', () => {
-    test.pass('event #3');
+  targetEmitter.on("testEvent3", () => {
+    test.pass("event #3");
   });
 
-  sourceEmitter.emit('testEvent1');
-  sourceEmitter.emit('testEvent2');
-  sourceEmitter.emit('testEvent3');
+  sourceEmitter.emit("testEvent1");
+  sourceEmitter.emit("testEvent2");
+  sourceEmitter.emit("testEvent3");
 });
 
-tap.test('forward all events by method', (test) => {
+tap.test("forward all events by method", test => {
   test.plan(3);
 
   const sourceEmitter = common.emitter();
@@ -45,73 +45,74 @@ tap.test('forward all events by method', (test) => {
 
   sourceEmitter.forward(targetEmitter);
 
-  targetEmitter.on('testEvent1', () => {
-    test.pass('event #1');
+  targetEmitter.on("testEvent1", () => {
+    test.pass("event #1");
   });
 
-  targetEmitter.on('testEvent2', () => {
-    test.pass('event #2');
+  targetEmitter.on("testEvent2", () => {
+    test.pass("event #2");
   });
 
-  targetEmitter.on('testEvent3', () => {
-    test.pass('event #3');
+  targetEmitter.on("testEvent3", () => {
+    test.pass("event #3");
   });
 
-  sourceEmitter.emit('testEvent1');
-  sourceEmitter.emit('testEvent2');
-  sourceEmitter.emit('testEvent3');
+  sourceEmitter.emit("testEvent1");
+  sourceEmitter.emit("testEvent2");
+  sourceEmitter.emit("testEvent3");
 });
 
-tap.test('forward a single event', (test) => {
+tap.test("forward a single event", test => {
   test.plan(1);
 
   const sourceEventEmitter = new events.EventEmitter();
   const targetEventEmitter = new events.EventEmitter();
 
-  common.forwardEvents(sourceEventEmitter, targetEventEmitter, 'testEvent');
+  common.forwardEvents(sourceEventEmitter, targetEventEmitter, "testEvent");
 
-  targetEventEmitter.on('testEvent', () => {
-    test.pass('event handler must be called');
+  targetEventEmitter.on("testEvent", () => {
+    test.pass("event handler must be called");
   });
 
-  sourceEventEmitter.emit('testEvent');
+  sourceEventEmitter.emit("testEvent");
 });
 
-tap.test('forward a single event under a new name', (test) => {
+tap.test("forward a single event under a new name", test => {
   test.plan(1);
 
   const sourceEventEmitter = new events.EventEmitter();
   const targetEventEmitter = new events.EventEmitter();
 
-  common.forwardEvents(
-    sourceEventEmitter, targetEventEmitter, { testEvent: 'renamedEvent' }
-  );
-
-  targetEventEmitter.on('renamedEvent', () => {
-    test.pass('event handler must be called');
+  common.forwardEvents(sourceEventEmitter, targetEventEmitter, {
+    testEvent: "renamedEvent"
   });
 
-  sourceEventEmitter.emit('testEvent');
+  targetEventEmitter.on("renamedEvent", () => {
+    test.pass("event handler must be called");
+  });
+
+  sourceEventEmitter.emit("testEvent");
 });
 
-tap.test('forward multiple events', (test) => {
+tap.test("forward multiple events", test => {
   test.plan(2);
 
   const sourceEventEmitter = new events.EventEmitter();
   const targetEventEmitter = new events.EventEmitter();
 
-  common.forwardEvents(
-    sourceEventEmitter, targetEventEmitter, ['event1', 'event2']
-  );
+  common.forwardEvents(sourceEventEmitter, targetEventEmitter, [
+    "event1",
+    "event2"
+  ]);
 
-  targetEventEmitter.on('event1', () => {
-    test.pass('first event handler must be called');
+  targetEventEmitter.on("event1", () => {
+    test.pass("first event handler must be called");
   });
 
-  targetEventEmitter.on('event2', () => {
-    test.pass('second event handler must be called');
+  targetEventEmitter.on("event2", () => {
+    test.pass("second event handler must be called");
   });
 
-  sourceEventEmitter.emit('event1');
-  sourceEventEmitter.emit('event2');
+  sourceEventEmitter.emit("event1");
+  sourceEventEmitter.emit("event2");
 });

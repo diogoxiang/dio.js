@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const tap = require('tap');
-const common = require('..');
+const tap = require("tap");
+const common = require("../src/module/callbacks");
 
-tap.test('unsafeCallback', (test) => {
+tap.test("unsafeCallback", test => {
   const callback = (...args) => {
     test.strictSame(args, [1, 2, 3]);
     test.end();
@@ -14,7 +14,7 @@ tap.test('unsafeCallback', (test) => {
   cb(...args);
 });
 
-tap.test('unsafeCallback without callback', (test) => {
+tap.test("unsafeCallback without callback", test => {
   const args = [1, 2, 3];
   const cb = common.unsafeCallback(args);
   test.strictSame(args, [1, 2, 3]);
@@ -22,18 +22,18 @@ tap.test('unsafeCallback without callback', (test) => {
   test.end();
 });
 
-tap.test('safeCallback', (test) => {
+tap.test("safeCallback", test => {
   const callback = (...args) => {
     test.strictSame(args, [1, 2, 3]);
     test.end();
   };
   const args = [1, 2, 3, callback];
   const wrappedCb = common.safeCallback(args);
-  test.strictSame(typeof(wrappedCb), 'function');
+  test.strictSame(typeof wrappedCb, "function");
   wrappedCb(...args);
 });
 
-tap.test('safeCallback without callback', (test) => {
+tap.test("safeCallback without callback", test => {
   const args = [1, 2, 3];
   const wrappedCb = common.safeCallback(args);
   test.strictSame(args, [1, 2, 3]);
@@ -41,18 +41,18 @@ tap.test('safeCallback without callback', (test) => {
   test.end();
 });
 
-tap.test('safeCallback', (test) => {
+tap.test("safeCallback", test => {
   const callback = (...args) => {
     test.strictSame(args, [1, 2, 3]);
     test.end();
   };
   const args = [1, 2, 3, callback];
   const wrappedCb = common.safeCallback(args);
-  test.strictSame(typeof(wrappedCb), 'function');
+  test.strictSame(typeof wrappedCb, "function");
   wrappedCb(...args);
 });
 
-tap.test('safeCallback return emptiness', (test) => {
+tap.test("safeCallback return emptiness", test => {
   const args = [1, 2, 3];
   const wrappedCb = common.safeCallback(args);
   test.strictSame(wrappedCb, common.emptiness);
@@ -60,30 +60,30 @@ tap.test('safeCallback return emptiness', (test) => {
   test.end();
 });
 
-tap.test('onceCallback prevent callback twice', (test) => {
+tap.test("onceCallback prevent callback twice", test => {
   const callback = (...args) => {
     test.strictSame(args, [1, 2, 3]);
     test.end();
   };
   const args = [1, 2, 3, callback];
   const wrappedCb = common.onceCallback(args);
-  test.strictSame(typeof(wrappedCb), 'function');
+  test.strictSame(typeof wrappedCb, "function");
   wrappedCb(...args);
   wrappedCb(...args);
 });
 
-tap.test('requiredCallback', (test) => {
+tap.test("requiredCallback", test => {
   const callback = (...args) => {
     test.strictSame(args, [1, 2, 3]);
     test.end();
   };
   const args = [1, 2, 3, callback];
   const wrappedCb = common.requiredCallback(args);
-  test.strictSame(typeof(wrappedCb), 'function');
+  test.strictSame(typeof wrappedCb, "function");
   wrappedCb(...args);
 });
 
-tap.test('requiredCallback raise', (test) => {
+tap.test("requiredCallback raise", test => {
   const args = [1, 2, 3];
   try {
     const wrappedCb = common.requiredCallback(args);
@@ -94,7 +94,7 @@ tap.test('requiredCallback raise', (test) => {
   }
 });
 
-tap.test('once', (test) => {
+tap.test("once", test => {
   const fn = () => {
     test.end();
   };
@@ -103,7 +103,7 @@ tap.test('once', (test) => {
   wrapped();
 });
 
-tap.test('once without function', (test) => {
+tap.test("once without function", test => {
   const wrapped = common.once(null);
   test.strictSame(wrapped, common.emptiness);
   wrapped();

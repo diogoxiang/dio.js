@@ -1,20 +1,24 @@
-'use strict';
+"use strict";
 
-const path = require('path');
+const path = require("path");
 
-const { getByPath } = require('./data');
-const { nowDateTime } = require('./time');
+const { getByPath } = require("./data");
+const { nowDateTime } = require("./time");
 
-const HTML_ESCAPE_REGEXP = new RegExp('[&<>"\'/]', 'g');
+const HTML_ESCAPE_REGEXP = new RegExp("[&<>\"'/]", "g");
 
 const HTML_ESCAPE_CHARS = {
-  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#39;'
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
 };
 
-const ALPHA_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const ALPHA_LOWER = 'abcdefghijklmnopqrstuvwxyz';
+const ALPHA_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ALPHA_LOWER = "abcdefghijklmnopqrstuvwxyz";
 const ALPHA = ALPHA_UPPER + ALPHA_LOWER;
-const DIGIT = '0123456789';
+const DIGIT = "0123456789";
 const ALPHA_DIGIT = ALPHA + DIGIT;
 
 const htmlEscape = (
@@ -22,9 +26,7 @@ const htmlEscape = (
   content // string, to escape
   // Returns: string
   // Example: htmlEscape('5>=5') = '5&lt;=5'
-) => (
-  content.replace(HTML_ESCAPE_REGEXP, char => HTML_ESCAPE_CHARS[char])
-);
+) => content.replace(HTML_ESCAPE_REGEXP, char => HTML_ESCAPE_CHARS[char]);
 
 const SUBST_REGEXP = /@([-.0-9a-zA-Z]+)@/g;
 
@@ -35,35 +37,34 @@ const subst = (
   dataPath, // string, current position in data structure
   escapeHtml // boolean, escape html special characters if true
   // Returns: string
-) => (
+) =>
   tpl.replace(SUBST_REGEXP, (s, key) => {
-    const pos = key.indexOf('.');
+    const pos = key.indexOf(".");
     const name = pos === 0 ? dataPath + key : key;
     let value = getByPath(data, name);
     if (value === undefined) {
-      if (key === '.value') {
+      if (key === ".value") {
         value = getByPath(data, dataPath);
       } else {
-        value = '[undefined]';
+        value = "[undefined]";
       }
     }
     if (value === null) {
-      value = '[null]';
+      value = "[null]";
     } else if (value === undefined) {
-      value = '[undefined]';
-    } else if (typeof(value) === 'object') {
-      if (value.constructor.name === 'Date') {
+      value = "[undefined]";
+    } else if (typeof value === "object") {
+      if (value.constructor.name === "Date") {
         value = nowDateTime(value);
-      } else if (value.constructor.name === 'Array') {
-        value = '[array]';
+      } else if (value.constructor.name === "Array") {
+        value = "[array]";
       } else {
-        value = '[object]';
+        value = "[object]";
       }
     }
     if (escapeHtml) value = htmlEscape(value);
     return value;
-  })
-);
+  });
 
 const fileExt = (
   // Extract file extension in lower case with no dot
@@ -71,9 +72,11 @@ const fileExt = (
   // Returns: string
   // Example: fileExt('/dir/file.txt')
   // Result: 'txt'
-) => (
-  path.extname(fileName).replace('.', '').toLowerCase()
-);
+) =>
+  path
+    .extname(fileName)
+    .replace(".", "")
+    .toLowerCase();
 
 const removeExt = (
   // Remove file extension from file name
@@ -81,20 +84,15 @@ const removeExt = (
   // Returns: string
   // Example: fileExt('file.txt')
   // Result: 'file'
-) => (
-  fileName.substr(0, fileName.lastIndexOf('.'))
-);
+) => fileName.substr(0, fileName.lastIndexOf("."));
 
 const CAPITALIZE_REGEXP = /\w+/g;
 
 const capitalize = (
   // Capitalize string
   s // string
-) => (
-  s.replace(CAPITALIZE_REGEXP, (word) => (
-    word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()
-  ))
-);
+) =>
+  s.replace(CAPITALIZE_REGEXP, word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase());
 
 const UNDERLINE_REGEXP = /_/g;
 
@@ -102,55 +100,60 @@ const spinalToCamel = (
   // Convert spinal case to camel case
   name // string
   // Returns: string
-) => (
+) =>
   name
-    .replace(UNDERLINE_REGEXP, '-')
-    .split('-')
+    .replace(UNDERLINE_REGEXP, "-")
+    .split("-")
     .map((part, i) => (i > 0 ? capitalize(part) : part))
-    .join('')
-);
+    .join("");
 
 const ESCAPE_REGEXP_SPECIALS = [
   // order matters for these
-  '-', '[', ']',
+  "-",
+  "[",
+  "]",
   // order doesn't matter for any of these
-  '/', '{', '}', '(', ')', '*', '+', '?', '.', '\\', '^', '$', '|'
+  "/",
+  "{",
+  "}",
+  "(",
+  ")",
+  "*",
+  "+",
+  "?",
+  ".",
+  "\\",
+  "^",
+  "$",
+  "|"
 ];
 
-const ESCAPE_REGEXP = new RegExp(
-  '[' + ESCAPE_REGEXP_SPECIALS.join('\\') + ']', 'g'
-);
+const ESCAPE_REGEXP = new RegExp("[" + ESCAPE_REGEXP_SPECIALS.join("\\") + "]", "g");
 
 const escapeRegExp = (
   // Escape regular expression control characters
   s // string
   // Returns: string
   // Example: escapeRegExp('/path/to/res?search=this.that')
-) => (
-  s.replace(ESCAPE_REGEXP, '\\$&')
-);
+) => s.replace(ESCAPE_REGEXP, "\\$&");
 
 const newEscapedRegExp = (
   // Generate escaped regular expression
   s // string
   // Returns: RegExp, instance
-) => (
-  new RegExp(escapeRegExp(s), 'g')
-);
+) => new RegExp(escapeRegExp(s), "g");
 
 const addTrailingSlash = (
   // Add trailing slash at the end if it has no
   s // string
   // Returns: string
-) => s + (s.endsWith('/') ? '' : '/');
+) => s + (s.endsWith("/") ? "" : "/");
 
 const stripTrailingSlash = (
   // Remove trailing slash from string
   s // string
   // Returns: string
-) => (
-  s.endsWith('/') ? s.substr(0, s.length - 1) : s
-);
+) => (s.endsWith("/") ? s.substr(0, s.length - 1) : s);
 
 const dirname = (
   // Get directory name with trailing slash from path
@@ -158,7 +161,7 @@ const dirname = (
   // Returns: string
 ) => {
   let dir = path.dirname(filePath);
-  if (dir !== '/') dir += '/';
+  if (dir !== "/") dir += "/";
   return dir;
 };
 
@@ -170,11 +173,11 @@ const between = (
   // Returns: string
 ) => {
   let i = s.indexOf(prefix);
-  if (i === -1) return '';
+  if (i === -1) return "";
   s = s.substring(i + prefix.length);
   if (suffix) {
     i = s.indexOf(suffix);
-    if (i === -1) return '';
+    if (i === -1) return "";
     s = s.substring(0, i);
   }
   return s;
@@ -186,9 +189,7 @@ const removeBOM = (
   // Remove UTF-8 BOM
   s // string, possibly starts with BOM
   // Returns: string
-) => (
-  typeof(s) === 'string' ? s.replace(BOM_REGEXP, '') : s
-);
+) => (typeof s === "string" ? s.replace(BOM_REGEXP, "") : s);
 
 const ITEM_ESCAPE_REGEXP = /\\\*/g;
 
@@ -199,11 +200,9 @@ const arrayRegExp = (
   // Example: ['/css/*', '/index.html']
 ) => {
   if (!items || items.length === 0) return null;
-  items = items.map(
-    item => escapeRegExp(item).replace(ITEM_ESCAPE_REGEXP, '.*')
-  );
-  const ex = items.length === 1 ? items[0] : '((' + items.join(')|(') + '))';
-  return new RegExp('^' + ex + '$');
+  items = items.map(item => escapeRegExp(item).replace(ITEM_ESCAPE_REGEXP, ".*"));
+  const ex = items.length === 1 ? items[0] : "((" + items.join(")|(") + "))";
+  return new RegExp("^" + ex + "$");
 };
 
 const section = (
@@ -214,7 +213,7 @@ const section = (
   // Returns: ['All you need ', ' JavaScript']
 ) => {
   const i = s.indexOf(separator);
-  if (i < 0) return [s, ''];
+  if (i < 0) return [s, ""];
   return [s.slice(0, i), s.slice(i + separator.length)];
 };
 
@@ -226,27 +225,25 @@ const rsection = (
   // Returns: ['All you need is Jav', 'Script']
 ) => {
   const i = s.lastIndexOf(separator);
-  if (i < 0) return [s, ''];
+  if (i < 0) return [s, ""];
   return [s.slice(0, i), s.slice(i + separator.length)];
 };
 
 const split = (
   // Splits string by multiple occurrence of separator
   s, // string
-  separator = ',', // string (optional), default: ','
+  separator = ",", // string (optional), default: ','
   limit = -1 // number (optional), // max length of result array
   // Example: split('a,b,c,d')
   // Result: ['a', 'b', 'c', 'd']
   // Example: split('a,b,c,d', ',', 2)
   // Result: ['a', 'b']
-) => (
-  s.split(separator, limit)
-);
+) => s.split(separator, limit);
 
 const rsplit = (
   // Splits string by multiple occurrence of separator
   s, // string
-  separator = ',', // string (optional), default: ','
+  separator = ",", // string (optional), default: ','
   limit = -1 // number (optional), // max length of result array
   // Example: split('a,b,c,d', ',', 2)
   // Result: ['c', 'd']
@@ -291,5 +288,5 @@ module.exports = {
   ALPHA_LOWER,
   ALPHA,
   DIGIT,
-  ALPHA_DIGIT,
+  ALPHA_DIGIT
 };
