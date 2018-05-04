@@ -64,6 +64,19 @@ const last = (
   // Returns: element
 ) => arr[arr.length - 1];
 
+
+/**
+ * 插入参数
+ * @param {*} arr 
+ * @param {*} item 
+ * @param {*} index 
+ */
+function insert(arr, item, index) {
+  var a = arr.slice(0);
+  a.splice(index, 0, item);
+  return a;
+}
+
 // export { splitAt, shuffle, range, sequence, last };
 module.exports = {
   splitAt,
