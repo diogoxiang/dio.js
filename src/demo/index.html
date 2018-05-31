@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>zepto ajax 拦截</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="xhr.js"></script>
+    <script src="zepto.js"></script>
+</head>
+
+<body>
+    zepto ajax 拦截
+    <script>
+
+        // $.ajaxSettings.beforeSend = function (xhr, request) {
+        //     console.log(request.headers)
+        //     // 在这里加上你的 token 
+        // }
+
+        // $.ajaxSettings.complete = function (status, xhr) {
+        //     console.log(xhr);
+
+        // }
+        overwriteXhr({
+            open: function (method, url, async) {
+                // do some before open
+                this.xhr.open(method, url);
+                console.log(url);
+            },
+            send: function (data) {
+                // do some before send
+                this.xhr.send(data);
+                console.log(data);
+            },
+            onreadystatechange: function (data) {
+                // console.log(object);
+                console.log(this.xhr);
+            }
+        })
+
+        doajax()
+        function doajax() {
+            $.ajax({
+                url: 'http://yz2-m-stg.taiheiot.com/cloud2.member.api/wx/jsSignature.do',
+                data: "123456",
+                dataType: "json",
+                success: function (data, status, xhr) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(xhr)
+
+                },
+                error: function (xhr, errorType, error) {
+                    console.log(xhr);
+                    console.log(errorType);
+                    console.log(error);
+                }
+            })
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
