@@ -106,7 +106,6 @@ var overwriteXhr = (function () {
                                     return xhr.open(method, url, asynchronous, username, password);
                                 };
                             } else if (key in BasicFields) {
-                                debugger
                                 this[key] = function () {
                                     return xhr[key]();
                                 };

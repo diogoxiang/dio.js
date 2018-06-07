@@ -33,20 +33,25 @@
             send: function (data) {
                 // do some before send
                 this.xhr.send(data);
-                console.log(data);
-            },
-            onreadystatechange: function (data) {
-                // console.log(object);
+
+
+
                 console.log(this.xhr);
             }
         })
 
+
         doajax()
+
+        setTimeout(() => {
+            doajax()
+        }, 1000);
         function doajax() {
             $.ajax({
                 url: 'http://yz2-m-stg.taiheiot.com/cloud2.member.api/wx/jsSignature.do',
                 data: "123456",
                 dataType: "json",
+                timeout: 1,
                 success: function (data, status, xhr) {
                     console.log(data);
                     console.log(status);
