@@ -106,7 +106,6 @@ var overwriteXhr = (function () {
                                     return xhr.open(method, url, asynchronous, username, password);
                                 };
                             } else if (key in BasicFields) {
-                                debugger
                                 this[key] = function () {
                                     return xhr[key]();
                                 };
@@ -137,7 +136,9 @@ var overwriteXhr = (function () {
                             forEach(statusFields, function (field) {
                                 try {
                                     ctx[field] = xhr[field];
+
                                 } catch (e) {
+
                                 }
                             });
                             if (isFunction(ctx[key])) {
@@ -150,6 +151,7 @@ var overwriteXhr = (function () {
         }
     };
 
+    //重写方法
     function forIn(obj, cb, ctx) {
         for (var k in obj) {
             try {
