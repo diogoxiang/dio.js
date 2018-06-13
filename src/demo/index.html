@@ -33,29 +33,27 @@
             send: function (data) {
                 // do some before send
                 this.xhr.send(data);
-                console.log(data);
-                this.addEventListener("readystatechange", function () {
-                    // your code goes here...
-                    console.log("Interception :) " + this.readyState);
-                    console.log(this);
-                    // debugger
-                }, false);
 
+
+
+                console.log(this.xhr);
             }
         })
 
 
-        doajax('123')
-        // doajax('456')
-        // doajax('789')
-        // doajax('abc')
-        function doajax(str) {
+        doajax()
+
+        setTimeout(() => {
+            doajax()
+        }, 1000);
+        function doajax() {
             $.ajax({
                 url: 'http://yz2-m-stg.taiheiot.com/cloud2.member.api/wx/jsSignature.do',
                 data: str,
                 type: "POST",
                 // timeout: 1,
                 dataType: "json",
+                timeout: 1,
                 success: function (data, status, xhr) {
                     console.log(data);
                     console.log(status);
