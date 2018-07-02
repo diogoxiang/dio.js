@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: black;
+            font-family: 'Lato', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+
+        /**
+ * Settings
+ **/
+
+        var GRAVITY = -0.2;
+        var BOUNCINESS = 0.7;
+        var TEXT = 'Click to drop some balls'.toUpperCase();
+        /**
+         * Globals
+         **/
+        var ctx,
+            isDown = false,
+            balls = [],
+            mouse = { x: 0, y: 0 },
+            time = 0,
+            textWidth = 0,
+            textRect = null,
+            fSize = '30px';
+
+        function init() {
+            if (window.innerWidth < 500) {
+                fSize = '20px';
+            }
+
+            var c = document.createElement('canvas');
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+            ctx = c.getContext('2d');
+            ctx.globalCompositeOperation = 'soft-light';
+            textWidth = getTextWidth();
+            textRect = calculateTextRect(textWidth);
+            document.body.appendChild(c);
+            // mouse
+            document.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('mousemove', onMouseMove);
+            // touch
+            document.addEventListener('touchstart', onMouseDown);
+            document.addEventListener('touchend', onMouseUp);
+            document.addEventListener('touchmove', onMouseMove);
+
+            animate();
+        }
+
+        function calculateTextRect(tWidth) {
+            // center
+            var rect = {
+                x: window.innerWidth * 0.5 - tWidth * 0.5,
+                y: window.innerHeight * 0.5,
+                w: tWidth,
+                h: parseInt(fSize)
+            }
+            return rect;
+        }
+
+        function getTextWidth() {
+            ctx.font = fSize + " Lato";
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.fillText(TEXT, 0, 0);
+            var text = ctx.measureText(TEXT);
+            return text.width;
+        }
+
+        function onMouseDown(e) {
+            isDown = true;
+        }
+
+        function onMouseUp(e) {
+            isDown = false;
+        }
+
+        function onMouseMove(e) {
+            e.preventDefault();
+            mouse.x = e.clientX || e.targetTouches[0].pageX;
+            mouse.y = e.clientY || e.targetTouches[0].pageY;
+        }
+
+        function draw() {
+            // clear
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            if (isDown) {
+                balls.push(createBall());
+            }
+
+            // draw balls
+            for (var i = 0, l = balls.length; i < l; i++) {
+                var ball = balls[i];
+                if (ball) {
+                    updateBall(ball);
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.currentRadius, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = hsla(ball.color);
+                    ctx.fill();
+                    if (ball.remove) {
+                        balls.splice(i, 1);
+                    }
+                }
+            }
+            drawText();
+            time += 0.01;
+        }
+
+        function drawText() {
+            // draw text
+            ctx.font = fSize + " Lato";
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.textBaseline = 'top';
+            ctx.fillText(TEXT, textRect.x, textRect.y - 5);
+        }
+
+        function updateBall(ball) {
+            if (ball.color.a < ball.endAlpha) {
+                ball.color.a += 0.08;
+            }
+
+            if (ball.currentRadius < ball.radius) {
+                ball.currentRadius += 0.3;
+            }
+            //ball.color.s = 30 + Math.abs(Math.sin(time)) * 70;
+            //ball.color.l = 30 + Math.abs(Math.sin(time)) * 40;
+
+            // bounce in text
+            if (hitTest(ball, textRect)) {
+                if (ball.vy > 0) {
+                    ball.y -= 3;
+                } else {
+                    ball.y += 3;
+                }
+                ball.vy *= -1 * BOUNCINESS;
+            }
+
+            // bounce in floor
+            if (ball.y > window.innerHeight) {
+                ball.y = window.innerHeight;
+                ball.vy *= -1 * BOUNCINESS;
+            }
+
+            if (ball.x > window.innerWidth || ball.x < 0) {
+                ball.remove = true;
+            }
+
+            // add forces
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            ball.vy -= GRAVITY;
+        }
+
+        function hitTest(ball, rect) {
+            var x = ball.x;
+            var y = ball.y;
+            var X = rect.x;
+            var Y = rect.y;
+            var W = rect.w;
+            var H = rect.h;
+            return (x >= X) && (x < X + W) && (y >= Y) && (y < Y + H) ? true : false;
+        }
+
+        function createBall() {
+            var dir = Math.random();
+            var ball = {};
+            ball.x = mouse.x;
+            ball.y = mouse.y;
+            if (dir > 0.5) {
+                ball.vx = rand(-4, -1);
+            } else {
+                ball.vx = rand(1, 4);
+            }
+
+            ball.vy = rand(-5, -10);
+            ball.radius = Math.floor(rand(10, 50));
+            ball.currentRadius = 0;
+            ball.remove = false;
+            ball.endAlpha = rand(0, 1);
+            ball.color = {
+                h: Math.abs(Math.sin(time * 0.1)) * 360,
+                s: rand(30, 100),
+                l: 20 + Math.abs(Math.sin(time)) * 50,
+                a: 0
+            }
+            return ball;
+        }
+
+        function hsla(obj) {
+            return 'hsla(' + obj.h + ', ' + obj.s + '%, ' + obj.l + '%, ' + obj.a + ')';
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            draw();
+        }
+
+        /**
+         * Helpers
+         **/
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // kick it off
+        window.onload = function () {
+            init();
+        }
+    </script>
+</body>
+
+</html>

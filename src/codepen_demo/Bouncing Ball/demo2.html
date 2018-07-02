@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.1/svg.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            max-width: 100%;
+            overflow-y: hidden;
+
+        }
+
+        #svg-area {
+            background: transparent;
+            margin: 0 auto;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="svg-area"></div>
+
+    <script>    
+
+        var width = window.innerWidth / 2;
+        var height = window.innerHeight / 2;
+        var particles = [];
+        var g = 0.5;
+
+        var draw = SVG('svg-area').size(width, height);
+
+        var Particle = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.vx = Math.random() * 10 - 5;
+            this.vy = 0;
+            this.sizex = 20;
+            this.sizey = 20;
+            // this.color = "hsl(" + Math.random() * 360 + ",100%,50%)";
+            this.color = 'red'
+        };
+
+        Particle.prototype.Draw = function () {
+            draw.ellipse(this.sizex, this.sizey).fill(this.color).move(this.x, this.y);
+        };
+
+        Particle.prototype.Move = function () {
+            this.y += this.vy;
+            this.x += this.vx;
+            if (this.y > height) {
+                this.vy = -this.vy;
+            }
+            else this.vy += g;
+            if (this.x > width || this.x < 0)
+                this.vx = -this.vx;
+        };
+
+
+        function loop(currentTime) {
+            draw.clear();
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].Move();
+                particles[i].Draw();
+            }
+            requestAnimationFrame(loop);
+        }
+
+        for (var i = 0; i < 13; i++) {
+            particles.push(new Particle(Math.random() * width, Math.random() * height));
+
+        }
+
+        // loop();
+
+    </script>
+
+
+
+</body>
+
+</html>

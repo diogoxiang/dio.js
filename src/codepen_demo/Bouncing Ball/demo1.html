@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bounce ball</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script> -->
+    <script src="p5.js"></script>
+    <style>
+        body {
+            background: #f1d5a9;
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+
+
+    <script>
+        var ballList = [];
+
+        function setup() {
+            createCanvas(250, 400);
+
+            noStroke();
+            for (var i = 0; i < 10; i++) {
+                ballList.push(new Ball()); //create a ball
+            }
+        }
+
+        function draw() {
+            translate(width / 2, height / 2)
+            background(0); //black
+            for (var j = 0; j < ballList.length; j++) {
+                ballList[j].update();
+            }
+        }
+
+
+        function Ball() {
+            this.x = random(-200, 200);
+            this.y = random(-200, 200);
+            this.xvel = random(-5, 5);
+            this.yvel = random(-5, 5);
+            this.size = random(50, 50);
+            this.color = color("red");
+
+            this.update = function () {
+
+                //update position by velocity
+                this.x += this.xvel;
+                this.y += this.yvel;
+                this.bounce(); //bounce if necessary
+                //draw the ball
+                fill(this.color)
+                ellipse(this.x, this.y, this.size, this.size);
+            }
+
+            this.bounce = function () {
+                //bounce
+                if ((this.x > width / 2) || (this.x < -width / 2)) {
+                    this.xvel = -this.xvel;
+                }
+
+                if ((this.y > height / 2) || (this.y < -height / 2)) {
+                    this.yvel = -this.yvel;
+                }
+            }
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
