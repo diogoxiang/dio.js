@@ -264,7 +264,9 @@ let extend = {
             off = false;
             return false;
         }
+    
         return callback && callback();
+        
     },
     /**
      * 辅助改变url

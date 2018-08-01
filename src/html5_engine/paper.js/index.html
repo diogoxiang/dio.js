@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>画个圈圈祝福你</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <link rel="stylesheet" type="text/css" href="css/normal.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css?v=11">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/paper-full.min.js"></script>
+ 
+</head>
+
+<body>
+
+    <body ontouchmove="event.preventDefault()">
+        <section class="page1">
+            <div class="star1"></div>
+            <div class="star2"></div>
+            <div class="tit">
+                <div class="quan3"></div>
+                <div class="quan1"></div>
+                <div class="quan2"></div>
+            </div>
+            <div class="mid">
+                <div class="moon"></div>
+                <div class="girl"></div>
+                <div class="cloud"></div>
+                <div class="start"></div>
+            </div>
+            <div class="logo">
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+        <section class="page2" style="display:;">
+            <div class="tit">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="screen">
+                <canvas id="canvas" width="316" height="280" resize stats hidpi="on" style="border:none;left:0;margin-left:0;"></canvas>
+                <span class="des" id="des">有圆心，有半径，就等你！开始画图吧！</span>
+
+                <div class="controls">
+                    <p class="info" id="info"></p>
+
+                    <p class="result" id="result">
+                        <span>
+                            <em id="score"></em> 分</span>
+                        <span id="text"></span>
+                    </p>
+                </div>
+            </div>
+            <canvas id="canvas1" width="316" height="280" style="border:none;left:0;margin-left:0;position: absolute;z-index: -1;display: none;"></canvas>
+        </section>
+        <section class="page3">
+            <div class="paint">
+                <div>
+                    <img src="" alt="" />
+                </div>
+            </div>
+            <div class="des">在这个看脸的世界，
+                <br/> 脸小我怕你看不清！</div>
+            <div class="btn">
+                <button class="again" id="again"></button>
+                <button class="save"></button>
+            </div>
+            <canvas id="canvas2" width="316" height="280" style="border:none;left:0;margin-left:0;position: absolute;top: 0;">
+            </canvas>
+        </section>
+        <section class="page4">
+            <div class="prize">
+                <div>
+                    <img src="" alt="" />
+                </div>
+            </div>
+            <div class="inp">
+                <div class="phone">
+                    <input id="input" type="number" placeholder="请留下你的手机号参与抽奖" />
+                    <button class="submit"></button>
+                </div>
+                <div class="suc">
+                    <span>提交成功，多画几次抽奖机会更多哦！</span>
+                </div>
+            </div>
+            <div class="btn">
+                <button class="again"></button>
+                <button class="save"></button>
+            </div>
+            <div class="intro">
+                <span>活动说明>></span>
+            </div>
+            <canvas id="canvas3" width="316" height="280" style="border:none;left:0;margin-left:0;position: absolute;top: 0;">
+            </canvas>
+        </section>
+        <section class="page5">
+            <ul>
+                <li>1.获得抽奖机会的用户将有机会参与
+                    <br/>“画个圈圈祝福你”抽奖。</li>
+                <li>2.抽奖日期为2017年10月10日。</li>
+                <li>3.获奖名单将在人民网微信平台公布。
+                    <br/>扫描下方二维码，关注人民网微信。</li>
+                <li>4.中奖用户需按要求提供相关
+                    <br/>邮寄信息，过期作废。</li>
+                <li>5.活动解释权归人民网所有。</li>
+            </ul>
+            <button class="goBack"></button>
+            <div style="position: absolute;right: .2rem;width: 2rem;height: 1.9rem;text-align: center;top: 6rem;">
+                <img style="display: block;width: 1.5rem;height: 1.5rem;margin: 0 auto" src="images/rmw.jpg" alt="" />
+                <p style="font-size: .16rem;line-height: .2rem;color: #fff;margin-top: .1rem">扫一扫，关注人民网</p>
+            </div>
+        </section>
+    </body>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/touch-0.2.14.min.js"></script>
+    
+    <script type="text/paperscript" canvas="canvas" src="js/canvas.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+
+    <script type="text/javascript" src="js/event.js?v=9"></script>
+     
+    </html>
