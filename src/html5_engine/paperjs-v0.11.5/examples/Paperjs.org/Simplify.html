@@ -7,23 +7,36 @@
     <script type="text/javascript" src="../../dist/paper-full.js"></script>
     <script type="text/paperscript" canvas="canvas">
         var path;
-
+        var viewWidth = view._viewSize.width; 
+        var viewHeight = view._viewSize.height; 
+        var windowWidth = viewWidth; 
+        var windowHeight= viewHeight; 
+        var winArea = viewWidth* viewHeight
+        var windowSize = new Size(windowWidth - 1, windowHeight - 1);
+        var path2;
+      
         var textItem = new PointText({
             content: 'Click and drag to draw a line.',
             point: new Point(20, 30),
             fillColor: 'black',
         });
 
+
+    
+        
         function onMouseDown(event) {
             // If we produced a path before, deselect it:
             if (path) {
                 path.selected = false;
             }
+            firstPoint = event.point;
+       
 
             // Create a new path and set its stroke color to black:
             path = new Path({
                 segments: [event.point],
                 strokeColor: 'black',
+                strokeWidth:1,
                 // Select the path, so we can see its segment points:
                 fullySelected: true
             });
@@ -47,17 +60,38 @@
             path.simplify(10);
 
             // Select the path, so we can see its segments:
-            path.fullySelected = true;
+            path.fullySelected = false;
 
             var newSegmentCount = path.segments.length;
             var difference = segmentCount - newSegmentCount;
             var percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
             textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
 
+            // closed path
+            //var from = new Point(firstPoint);
+            //var to = new Point(event.point);
+            //var pathe = new Path.Line(from, to); 
+            //pathe.strokeColor = 'black';
+
+            path.closed =true
+
+            console.log(path.area/winArea);
+            
+            console.log(path.pathData);
+           // path2.pathData = path.pathData
+            //path2.strokeColor = 'red';
         }
+
+        //var pData ='M252,151c92.55671,34.70877 55.81062,145.72375 13,205c-13.62319,18.86288 -33.4862,35.58213 -53,48c-0.62883,0.40016 -2,0.25464 -2,1z'
+        //var pathe = new Path(pData);
+        //pathe.strokeColor = 'red';
+ 
+    //var pathe = new Path.Circle({ center: view.center, radius: 30, strokeColor: 'black' });
+      
     </script>
 </head>
 <body>
     <canvas id="canvas" resize></canvas>
+    <!-- <canvas id="canvas" width="200" height="200" style="background:#eee;"></canvas> -->
 </body>
 </html>

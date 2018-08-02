@@ -92,6 +92,7 @@ function onFrame(event) {
                     rotation = 360 - hintLineRotated + rotation;
                     hintLineRotated = 360;
                 }
+                 
                 hintRadiusLine.rotate(rotation,new Point(viewWidth2, viewHeight2));
                 hintLongLine.rotate(rotation,new Point(viewWidth2, viewHeight2));
                 var intersectionsDraw = hintLongLine.getIntersections(drawed);
