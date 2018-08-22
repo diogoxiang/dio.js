@@ -429,6 +429,83 @@ let extend = {
         } else {
             return false
         }
+    },
+    /**
+     * 开启分享的功能
+     * @param {object}} config 微信配置信息
+     */
+    doShare: function (config,shareID) {
+
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: config.appId, // 必填，公众号的唯一标识
+            timestamp: config.timestamp, // 必填，生成签名的时间戳
+            nonceStr: config.nonceStr, // 必填，生成签名的随机串
+            signature: config.signature, // 必填，签名，见附录1
+            jsApiList: ['onMenuShareAppMessage', 'hideMenuItems', 'onMenuShareTimeline', 'showOptionMenu', 'showMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        wx.ready(function () {
+            wx.showOptionMenu(); //显示分享按钮
+
+            wx.onMenuShareAppMessage({
+                title: shareTxt.shareTxt[parseInt(Math.random() * 5)],
+                desc: '画好月圆 宽窄传情',
+                link: `${window.th.hosturl}/${window.th.sharePage}?shareid=${shareID}`,
+                imgUrl: `${window.th.hosturl}/sichuan/2018zhongqiu/static/${cover}`,
+                trigger: res => {
+                    // vm.wxRecord = false;
+                },
+                success: res => {
+                    console.log("AppMessage ok");
+                    // vm.wxRecord = false;
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: shareTxt.shareTxt[parseInt(Math.random() * 5)],
+                desc: shareTxt.shareTxt[parseInt(Math.random() * 5)],
+                link: `${window.th.hosturl}/${window.th.sharePage}?shareid=${shareID}`,
+                imgUrl: `${window.th.hosturl}/sichuan/2018zhongqiu/static/${cover}`,
+                trigger: res => {
+                    // vm.wxRecord = false;
+                },
+                success: res => {
+                    // vm.wxRecord = false;
+                    console.log("Timeline ok");
+
+                }
+
+            });
+            wx.showMenuItems({
+                menuList: [
+                    "menuItem:share:appMessage",
+                    "menuItem:share:timeline"
+                ]
+            });
+            wx.hideMenuItems({
+                menuList: [
+                    "menuItem:setFont",
+                    "menuItem:share:qq",
+                    "menuItem:share:weiboApp",
+                    "menuItem:favorite",
+                    "menuItem:share:facebook",
+                    "menuItem:share:QZone",
+                    "menuItem:editTag",
+                    "menuItem:delete",
+                    "menuItem:copyUrl",
+                    "menuItem:readMode",
+                    "menuItem:originPage",
+                    "menuItem:openWithQQBrowser",
+                    "menuItem:openWithSafari",
+                    "menuItem:share:email",
+                    "menuItem:share:brand"
+                ]
+            });
+
+
+        });
+
+
     }
 
 

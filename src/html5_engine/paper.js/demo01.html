@@ -30,6 +30,10 @@
 
             tool1.onMouseDrag = function (event) {
                 path.add(event.point);
+ 
+                // setTimeout(() => {
+                //     path.removeOnMove();
+                // }, 2000);
             }
 
             tool2 = new Tool();

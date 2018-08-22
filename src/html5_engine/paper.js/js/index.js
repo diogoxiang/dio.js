@@ -1,7 +1,8 @@
 /**
  * Created by bawuzhan on 2017/5/3.
  */
-(function () { //修正不支持jpeg压缩
+(function () { 
+    //修正不支持jpeg压缩
     var c = document.createElement('canvas');
     c.width = c.height = 1;
     var str = c.toDataURL('image/jpeg');

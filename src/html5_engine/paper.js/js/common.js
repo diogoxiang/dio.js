@@ -10,6 +10,7 @@ if (document.documentElement.clientWidth / document.documentElement.clientHeight
 };
 document.documentElement.style.fontSize = 100 * viewScale + 'px';
 
+console.log(viewScale);
 //禁止用户更改字号
 (function(){
     if (typeof(WeixinJSBridge) == "undefined") {

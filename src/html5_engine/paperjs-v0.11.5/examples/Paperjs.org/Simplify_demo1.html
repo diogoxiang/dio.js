@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>中秋节画圆</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../../dist/paper-full.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+        var path;
+        var viewWidth = view._viewSize.width; 
+        var viewHeight = view._viewSize.height; 
+        var windowWidth = viewWidth; 
+        var windowHeight= viewHeight; 
+        var winArea = viewWidth* viewHeight
+        var windowSize = new Size(windowWidth - 1, windowHeight - 1);
+        var path2;
+      
+       
+     
+ 
+         
+        
+        var originals = new Group( );
+        var operation, result, activeItem;
+          
+        var inner = new Path.Circle({
+            center: view.center,
+            radius: 100,
+            parent: originals,
+            fillColor: 'white'
+        });
+
+        var outer = new Path.Circle({
+            center: view.center,
+            radius: 140,
+            parent: originals,
+            fillColor: 'red'
+        });
+         
+
+        console.log(inner);
+        console.log(outer);
+
+        // 合并
+ var ring = outer.subtract(inner);
+         inner.remove();
+         outer.remove();
+        console.log(ring);
+             
+        console.log(view);
+ var cpath = new Path.Circle({
+ center: [0, windowHeight/2],
+ radius: windowHeight/2,
+           
+            fillColor: 'red'
+ })
+ console.log(cpath);
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize></canvas>
+    <!-- <canvas id="canvas" width="200" height="200" style="background:#eee;"></canvas> -->
+</body>
+</html>
