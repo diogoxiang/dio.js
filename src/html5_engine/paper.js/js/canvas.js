@@ -38,8 +38,7 @@ var page2 = document.getElementsByClassName('page2')[0];
 var page3 = document.getElementsByClassName('page3')[0];
 window.init = function () {
     perfection = 1;
-    circleRadius =
-        maxCircleRadius;
+    circleRadius = maxCircleRadius;
     status = 1;
     hintLineRotated = 0;
     drawed && drawed.remove();
@@ -57,7 +56,7 @@ window.init = function () {
     hintRadiusLine.rotate(120, centerPoint);
     hintLongLine.remove();
     hintLongLine = new Path.Line(centerPoint, new Point(viewWidth2 - windowMax, viewHeight2));
-    hintLongLine.rotate(120,centerPoint);
+    hintLongLine.rotate(120, centerPoint);
     simplified && simplified.remove();
     simplified = null;
 }
@@ -92,9 +91,9 @@ function onFrame(event) {
                     rotation = 360 - hintLineRotated + rotation;
                     hintLineRotated = 360;
                 }
-                 
-                hintRadiusLine.rotate(rotation,new Point(viewWidth2, viewHeight2));
-                hintLongLine.rotate(rotation,new Point(viewWidth2, viewHeight2));
+
+                hintRadiusLine.rotate(rotation, new Point(viewWidth2, viewHeight2));
+                hintLongLine.rotate(rotation, new Point(viewWidth2, viewHeight2));
                 var intersectionsDraw = hintLongLine.getIntersections(drawed);
                 var intersectionsCircle = hintLongLine.getIntersections(hintCircle);
                 var inter1 = centerPoint;

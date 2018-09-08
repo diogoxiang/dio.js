@@ -14,7 +14,7 @@
         var winArea = viewWidth* viewHeight
         var windowSize = new Size(windowWidth - 1, windowHeight - 1);
         var path2;
-      
+
         var textItem = new PointText({
             content: 'Click and drag to draw a line.',
             point: new Point(20, 30),
@@ -31,6 +31,7 @@
             }
             firstPoint = event.point;
 
+            console.log(firstPoint);
 
             // Create a new path and set its stroke color to black:
             path = new Path({
@@ -40,6 +41,7 @@
                 // Select the path, so we can see its segment points:
                 fullySelected: true
             });
+            path.moveTo(new Point(0,firstPoint.y), new Point(firstPoint))
         }
 
         // While the user drags the mouse, points are added to the path
@@ -64,7 +66,7 @@
             var segmentCount = path.segments.length;
 
             // When the mouse is released, simplify it:
-            path.simplify(10);
+
 
             // Select the path, so we can see its segments:
             path.fullySelected = false;
@@ -82,6 +84,16 @@
             console.log(path.area/winArea);
 
             console.log(path.pathData);
+            // path.translate(new Point(- firstPoint.x, 0));
+            // path.add( new Point(0,firstPoint.y))
+
+            var points = [new Point(0,firstPoint.y),new Point(firstPoint)]
+            // path.insertSegments(1,points)
+            // path.moveTo(new Point(0,firstPoint.y))
+            path.scale(1,0.7)
+            path.simplify(4);
+            console.log(path.pathData);
+
 
             //console.log(view);
 
@@ -98,7 +110,7 @@
         pathe.onClick = function(event){
             console.log(this);
         }
-        //pathe.position = new Point(0, view.center._y);
+        pathe.position = new Point(0, view.center._y);
 
         console.log(pathe.area/winArea);
         //pathe.onFrame = function(event) { this.position.x += 2; }

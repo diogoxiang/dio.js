@@ -30,4 +30,8 @@
 * common https://github.com/metarhia/common
 
 
-
+## eslint linter atom 
+cnpm i -g  eslint-plugin-import
+cnpm i -g  eslint-plugin-node
+cnpm i -g  eslint-plugin-promise
+cnpm i -g  eslint-plugin-standard
