@@ -1,0 +1,807 @@
+<html style="height: 100%; font-size: 48px;">
+
+<head>
+    <style type="text/css" class="AMap.Autocomplete">
+        .amap-sug-result {
+            position: absolute;
+            z-index: 1024;
+            background-color: #fefefe;
+            border: 1px solid #d1d1d1;
+            bottom: auto
+        }
+
+        .auto-item:hover {
+            background-color: #cae1ff
+        }
+
+        .auto-item {
+            white-space: nowrap;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px
+        }
+
+        .auto-item-span {
+            color: #c1c1c1;
+            padding-left: 4px
+        }
+    </style>
+    <style type="text/css" class="AMap.Geolocation">
+        .amap-geolocation-con .amap-geo {
+            background: #fff url(https://webapi.amap.com/theme/v1.3/markers/b/loc_gray.png) 50% 50% no-repeat;
+            width: 35px;
+            height: 35px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            right: 4px
+        }
+
+        .amap-locate-loading .amap-geo {
+            background-image: url(https://webapi.amap.com/theme/v1.3/loading.gif)
+        }
+
+        .amap-locate {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: url(https://webapi.amap.com/theme/v1.3/map_view.png);
+            _background: url(https://webapi.amap.com/theme/v1.3/map_view.gif);
+            background-position: -130px -185px;
+            cursor: pointer
+        }
+    </style>
+    <style type="text/css">
+        .amap-indoor-map .label-canvas {
+            position: absolute;
+            top: 0;
+            left: 0
+        }
+
+        .amap-indoor-map .highlight-image-con * {
+            pointer-events: none
+        }
+
+        .amap-indoormap-floorbar-control {
+            position: absolute;
+            margin: auto 0;
+            bottom: 165px;
+            right: 12px;
+            width: 35px;
+            text-align: center;
+            line-height: 1.3em;
+            overflow: hidden;
+            padding: 0 2px
+        }
+
+        .amap-indoormap-floorbar-control .panel-box {
+            background-color: rgba(255, 255, 255, .9);
+            border-radius: 3px;
+            border: 1px solid #ccc
+        }
+
+        .amap-indoormap-floorbar-control .select-dock {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            height: 30px;
+            border: solid #4196ff;
+            border-width: 0 2px;
+            border-radius: 2px;
+            pointer-events: none;
+            background: linear-gradient(to bottom, #f6f8f9 0, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%)
+        }
+
+        .amap-indoor-map .transition {
+            transition: opacity .2s
+        }
+
+        ,
+        .amap-indoormap-floorbar-control .transition {
+            transition: top .2s, margin-top .2s
+        }
+
+        .amap-indoormap-floorbar-control .select-dock:after,
+        .amap-indoormap-floorbar-control .select-dock:before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 0;
+            top: 10px;
+            border: solid transparent;
+            border-width: 4px;
+            border-left-color: #4196ff
+        }
+
+        .amap-indoormap-floorbar-control .select-dock:after {
+            right: 0;
+            left: auto;
+            border-left-color: transparent;
+            border-right-color: #4196ff
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile {
+            width: 37px
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile .floor-btn {
+            height: 35px;
+            line-height: 35px
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile .select-dock {
+            height: 35px;
+            top: 36px
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile .select-dock:after,
+        .amap-indoormap-floorbar-control.is-mobile .select-dock:before {
+            top: 13px
+        }
+
+        .amap-indoormap-floorbar-control.is-mobile .floor-list-box {
+            height: 105px
+        }
+
+        .amap-indoormap-floorbar-control .floor-list-item .floor-btn {
+            color: #555;
+            font-family: "Times New Roman", sans-serif, "Microsoft Yahei";
+            font-size: 16px
+        }
+
+        .amap-indoormap-floorbar-control .floor-list-item.selected .floor-btn {
+            color: #000
+        }
+
+        .amap-indoormap-floorbar-control .floor-btn {
+            height: 28px;
+            line-height: 28px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        .amap-indoormap-floorbar-control .floor-btn:hover {
+            background-color: rgba(221, 221, 221, .4)
+        }
+
+        .amap-indoormap-floorbar-control .floor-minus,
+        .amap-indoormap-floorbar-control .floor-plus {
+            position: relative;
+            text-indent: -1000em
+        }
+
+        .amap-indoormap-floorbar-control .floor-minus:after,
+        .amap-indoormap-floorbar-control .floor-plus:after {
+            content: "";
+            position: absolute;
+            margin: auto;
+            top: 9px;
+            left: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border: solid transparent;
+            border-width: 10px 8px;
+            border-top-color: #777
+        }
+
+        .amap-indoormap-floorbar-control .floor-minus.disabled,
+        .amap-indoormap-floorbar-control .floor-plus.disabled {
+            opacity: .3
+        }
+
+        .amap-indoormap-floorbar-control .floor-plus:after {
+            border-bottom-color: #777;
+            border-top-color: transparent;
+            top: -3px
+        }
+
+        .amap-indoormap-floorbar-control .floor-list-box {
+            max-height: 153px;
+            position: relative;
+            overflow-y: hidden
+        }
+
+        .amap-indoormap-floorbar-control .floor-list {
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+
+        .amap-indoormap-floorbar-control .floor-list-item {
+            position: relative
+        }
+
+        .amap-indoormap-floorbar-control .floor-btn.disabled,
+        .amap-indoormap-floorbar-control .floor-btn.disabled *,
+        .amap-indoormap-floorbar-control.with-indrm-loader * {
+            -webkit-pointer-events: none !important;
+            pointer-events: none !important
+        }
+
+        .amap-indoormap-floorbar-control .with-indrm-loader .floor-nonas {
+            opacity: .5
+        }
+
+        .amap-indoor-map-moverf-marker {
+            color: #555;
+            background-color: #FFFEEF;
+            border: 1px solid #7E7E7E;
+            padding: 3px 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            display: inline-block;
+            position: absolute;
+            top: 1em;
+            left: 1.2em
+        }
+
+        .amap-indoormap-floorbar-control .amap-indrm-loader {
+            -moz-animation: amap-indrm-loader 1250ms infinite linear;
+            -webkit-animation: amap-indrm-loader 1250ms infinite linear;
+            animation: amap-indrm-loader 1250ms infinite linear;
+            border: 2px solid #91A3D8;
+            border-right-color: transparent;
+            box-sizing: border-box;
+            display: inline-block;
+            overflow: hidden;
+            text-indent: -9999px;
+            width: 13px;
+            height: 13px;
+            border-radius: 7px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0
+        }
+
+        @-moz-keyframes amap-indrm-loader {
+            0% {
+                -moz-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            100% {
+                -moz-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @-webkit-keyframes amap-indrm-loader {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes amap-indrm-loader {
+            0% {
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            100% {
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+    <style type="text/css" class="AMap.style">
+        .vml {
+            behavior: url(#default#VML);
+            display: inline-block;
+            position: absolute
+        }
+
+        .amap-custom {
+            top: 0;
+            left: 0;
+            position: absolute
+        }
+
+        .amap-container img {
+            max-width: none !important;
+            max-height: none !important
+        }
+
+        .amap-container {
+            touch-action: none;
+            position: relative;
+            overflow: hidden;
+            background: #fcf9f2 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0AgMAAAC2uDcZAAAADFBMVEX////////////////1pQ5zAAAABHRSTlMAgP/AWuZC2AAAAVhJREFUeAFiYGAQYGDEQjAB2rcDC4BiGIqiU7abdKlO2QkeIClyPsDHweMKtOPHIJ1Op6/w7Y4fdqfT6VpndzqdrnV2p9PpWmd3Oj3qWndSoKp+2J1Op7vr7E6n07XO7nQ6XevsTqfTtc7udPo4/f787E6n0911dqfT6VpndzqdrnV2p9PpWmd3Ot27Ce8m6HS6u85dR6fTtU7r6HS61mkdnU7XOrvT6XTvJuxOp9PddXan0+laZ3c6na51dDpd67SOTqd7N+HdBJ1Od9e56+h0utZpHZ1O1zq70+l0rbM7nU73bsLudDrdXWd3Ol3rtI5Op2ud1tHpdK3TOjqd7t2EdxN0Ot1dZ3c6na51dqfT6VpndzqdrnV2p9Pp3k3Q6XR3nbuOTqdrndbR6XSt0zo6na51Wken072bsDudTnfX2Z1Op2ud3el0utbZnU7XOq2j0+t0uncTD1gO4zoT5doZAAAAAElFTkSuQmCC);
+            -ms-touch-action: none
+        }
+
+        .amap-drags,
+        .amap-layers {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden
+        }
+
+        .amap-layer img {
+            pointer-events: none
+        }
+
+        .amap-e,
+        .amap-maps {
+            width: 100%;
+            height: 100%
+        }
+
+        .amap-maps,
+        .amap-e,
+        .amap-layers,
+        .amap-tile,
+        .amap-tile-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden
+        }
+
+        .amap-context {
+            position: absolute;
+            left: 0;
+            top: 0
+        }
+
+        .amap-overlays,
+        .amap-markers,
+        .amap-marker {
+            position: absolute;
+            left: 0;
+            top: 0
+        }
+
+        .amap-layers {
+            z-index: 0
+        }
+
+        .amap-overlays {
+            z-index: 110;
+            cursor: default
+        }
+
+        .amap-markers {
+            z-index: 120
+        }
+
+        .amap-controls {
+            z-index: 150
+        }
+
+        .amap-copyright {
+            position: absolute;
+            display: block !important;
+            left: 77px;
+            height: 16px;
+            bottom: 0;
+            padding-bottom: 3px;
+            font-size: 11px;
+            font-family: Arial, sans-serif;
+            z-index: 160
+        }
+
+        .amap-logo {
+            position: absolute;
+            bottom: 1px;
+            left: 1px;
+            z-index: 160;
+            height: 20px
+        }
+
+        .amap-logo img {
+            width: 73px !important;
+            height: 20px !important;
+            border: 0;
+            vertical-align: baseline !important
+        }
+
+        .amap-icon {
+            position: relative;
+            z-index: 1;
+            overflow: hidden
+        }
+
+        .amap-icon img {
+            position: absolute;
+            z-index: -1
+        }
+
+        .amap-marker-label {
+            position: absolute;
+            z-index: 2;
+            border: 1px solid blue;
+            background-color: white;
+            white-space: nowrap;
+            cursor: default;
+            padding: 3px;
+            font-size: 12px;
+            line-height: 14px
+        }
+
+        .amap-info {
+            position: absolute;
+            left: 0;
+            z-index: 140;
+            width: 320px
+        }
+
+        .amap-menu {
+            position: absolute;
+            z-index: 140;
+            _width: 100px
+        }
+
+        .amap-info-close {
+            position: absolute;
+            right: 5px;
+            _right: 12px;
+            +right: 11px;
+            top: 5px;
+            _top: 2px;
+            +top: 2px;
+            color: #c3c3c3;
+            text-decoration: none;
+            font: bold 16px/14px Tahoma, Verdana, sans-serif;
+            width: 14px;
+            height: 14px
+        }
+
+        .amap-info-outer,
+        .amap-menu-outer {
+            box-shadow: 0 3px 14px rgba(0, 0, 100, 0.6);
+            background: none repeat scroll 0 0 white;
+            border-radius: 2px;
+            padding: 1px;
+            text-align: left;
+            border: #c0c0c0 solid 1px
+        }
+
+        .amap-info-outer:hover,
+        .amap-menu-outer:hover {
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.75)
+        }
+
+        .amap-info-content {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px 18px 10px 10px;
+            +margin: 0 10px;
+            +padding: 10px 0;
+            line-height: 1.4;
+            overflow: auto
+        }
+
+        .amap-marker-content {
+            position: relative
+        }
+
+        .amap-info {
+            _width: 320px
+        }
+
+        .amap-menu {
+            _width: 100px
+        }
+
+        .amap-info-sharp {
+            height: 23px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            top: -1px;
+            width: 30px;
+            background-image: url(https://webapi.amap.com/theme/v1.3/sharp.png);
+            _background-image: url(https://webapi.amap.com/theme/v1.3/sharp.gif)
+        }
+
+        .amap-menu-outer {
+            margin: 0;
+            padding: 0;
+            list-style-type: none
+        }
+
+        ul.amap-menu-outer li {
+            cursor: pointer;
+            height: 35px;
+            line-height: 35px;
+            word-break: break-all;
+            padding: 0 10px;
+            font-size: 12px;
+            white-space: nowrap
+        }
+
+        ul.amap-menu-outer li a {
+            text-decoration: none;
+            font-size: 13px;
+            margin: 0 5px;
+            color: #000;
+            padding: 5px 5px
+        }
+
+        ul.amap-menu-outer li:hover {
+            background-color: #f3f3ee
+        }
+
+        .amap-overlay-text-container {
+            display: block;
+            width: auto;
+            word-break: keep-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #fff;
+            padding: 2px 3px;
+            border: 1px solid #ccc;
+            border-radius: 3px
+        }
+
+        .amap-overlay-text-container.amap-overlay-text-empty {
+            display: none
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>你离家乡有多远</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,target-densitydpi=375,user-scalable=no">
+    <link rel="stylesheet" href="/static/lib/css/animate.min.css">
+    <link rel="stylesheet" href="/static/lib/swiper/swiper.min.css">
+    <link rel="stylesheet" href="/static/lib/css/public.css">
+    <script src="https://hm.baidu.com/hm.js?d8009a412a828cc423715b58a989fb94"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/js/loading.js?t=986"></script>
+    <!--<link rel="stylesheet" href="/static/h5/gdfbzq/css/base.css?t=1547086115">-->
+    <link rel="stylesheet" href="/static/h5/gdfbzq/css/base.css?t=999">
+    <script type="text/javascript">
+        var isIOS = navigator.userAgent.match(/iphone|ipod|ipad/gi);
+        (function (doc, win) {
+            var docEl = doc.documentElement, //Android不支持修改initial-scale
+                resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize';
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width >= 750) {
+                    docEl.style.fontSize = '100px';
+                } else {
+                    docEl.style.fontSize = 100 * (width / 750) + 'px';
+                }
+            };
+            recalc();
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+    <style type="text/css">
+        .amap-container {
+            cursor: url(https://webapi.amap.com/theme/v1.3/openhand.cur), default;
+        }
+
+        .amap-drag {
+            cursor: url(https://webapi.amap.com/theme/v1.3/closedhand.cur), default;
+        }
+    </style>
+</head>
+
+<body class="">
+    <input class="link" type="hidden" value="/static/h5/gdfbzq/images">
+    <div class="ewm" id="ewm" style="display: none;" title="https://h5.gdh5.cn/h5/index/gdfbzq?ctype=gdfb"><canvas
+            width="300" height="300" style="display: none;"></canvas><img style="display: block;" src="data:image/png;base64,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"></div>
+    <div class="ploading all_fix_page flex_column_ccenter font-s30 hide">
+        <img src="/static/h5/gdfbzq/images/loading.gif?t=2000">
+        <div class="loadingTxt">100%</div>
+    </div>
+    <div id="p2" class="p2 all_fix_page">
+        <div class="swiper-container swiper-container-vertical swiper-container-android">
+            <div class="swiper-wrapper" id="wrap">
+                <div class="swiper-slide slide1 swiper-slide-active" data-id="0" style="height: 572px;">
+                    <div class="slide1t pos_abs flex_row_se slideT">
+                        <div class="slide1t1 slideTT bkg_contain animated fadeIn"></div>
+                        <div class="slide1t2 slideTT bkg_contain animated fadeIn delay1"></div>
+                        <div class="slide1t3 slideTT bkg_contain animated fadeIn delay2"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide slide2 swiper-slide-next" data-id="1" style="height: 572px;">
+                    <div class="slide2t pos_abs flex_row_se slideT" style="display: none">
+                        <div class="slide2t1 slideTT bkg_contain animated fadeIn"></div>
+                        <div class="slide2t2 slideTT bkg_contain animated fadeIn delay1"></div>
+                        <div class="slide2t3 slideTT bkg_contain animated fadeIn delay2"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide slide3" data-id="2" style="height: 572px;">
+                    <div class="slide3t pos_abs flex_row_se slideT" style="display: none">
+                        <div class="slide3t1 slideTT bkg_contain animated fadeIn"></div>
+                        <div class="slide3t2 slideTT bkg_contain animated fadeIn delay1"></div>
+                        <div class="slide3t3 slideTT bkg_contain animated fadeIn delay2"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide slide4 pos_rel" data-id="3" style="height: 572px;">
+                    <div class="p4txt bkg_contain animated fadeIn pos_abs"></div>
+                    <div class="p4btn bkg_contain animated infinite pulse pos_abs" onclick="showPop()"></div>
+                </div>
+            </div>
+            <div class="swiper-button-prev pos_fix bkg_contain animated infinite bounce"></div>
+        </div>
+    </div>
+    <div class="pop zIndex3 flex_column_scenter all_fix_page" id="pop" style="display: none">
+        <div class="popInner flex_column_ccenter bkg_contain" style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+            <div class="inp flex_row_ccenter">
+                <span class="postxt">所在城市：</span>
+                <input class="posinput startpos" id="stipinput" type="text" placeholder="请输入您所在的城市名称">
+            </div>
+            <div class="inp flex_row_ccenter">
+                <span class="postxt">家乡城市：</span>
+                <input class="posinput" id="tipinput" type="text" placeholder="请输入您家乡的城市名称">
+            </div>
+            <div class="inp flex_row_ccenter">
+                <span class="postxt">您的昵称：</span>
+                <input class="posinput" maxlength="5" id="name" type="text" value="豆沙包" placeholder="请输入您的昵称(5个字内)">
+            </div>
+            <div class="inputip">输入城市必须是地级市以上<br>输入文字后，通过选择下拉文字完成地址确定</div>
+            <div class="kscjbtn bkg_contain animated infinite pulse" onclick="calc()"></div>
+        </div>
+        <div class="popInner2 flex_column_ccenter bkg_contain" style="display:none;">
+            <div class="popInner2txt">亲，请输入<br>正确的家乡城市名字哦！<br>通过选择下拉拉进行确定</div>
+            <div class="retbtn bkg_contain animated infinite pulse" onclick="hidePopInner2()"></div>
+        </div>
+    </div>
+    <div class="p5 all_fix_page bkg_contain" style="display: none;">
+        <!--<div class="posAbs pos_abs flex_row_ccenter"></div>-->
+        <div id="pos_0" class="posAbs pos_abs flex_row_ccenter" style="left:5.08rem;top:7.251rem;">广州</div>
+        <div id="pos_1" class="posAbs pos_abs flex_row_ccenter" style="left:5.03rem;top:6.401rem;">长沙</div>
+        <div id="pos_2" class="posAbs pos_abs flex_row_ccenter" style="left:5.95rem;top:6.691rem;">福州</div>
+        <div id="pos_3" class="posAbs pos_abs flex_row_ccenter" style="left:6.03rem;top:6.031000000000001rem;">杭州</div>
+        <div id="pos_4" class="posAbs pos_abs flex_row_ccenter" style="left:5.08rem;top:5.341rem;">郑州</div>
+        <div id="pos_5" class="posAbs pos_abs flex_row_ccenter" style="left:4.09rem;top:6.251rem;">重庆</div>
+        <div id="pos_6" class="posAbs pos_abs flex_row_ccenter" style="left:5.21rem;top:6.031000000000001rem;">武汉</div>
+        <div id="pos_7" class="posAbs pos_abs flex_row_ccenter" style="left:3.76rem;top:5.941rem;">成都</div>
+        <div id="pos_8" class="posAbs pos_abs flex_row_ccenter" style="left:3.78rem;top:5.111000000000001rem;">兰州</div>
+        <div id="pos_9" class="posAbs pos_abs flex_row_ccenter" style="left:1.92rem;top:5.9510000000000005rem;">拉萨</div>
+        <div id="pos_10" class="posAbs pos_abs flex_row_ccenter" style="left:3.49rem;top:6.891rem;">昆明</div>
+        <div id="pos_11" class="posAbs pos_abs flex_row_ccenter" style="left:4.13rem;top:6.6610000000000005rem;">贵阳</div>
+        <div id="pos_12" class="posAbs pos_abs flex_row_ccenter" style="left:4.33rem;top:7.321000000000001rem;">南宁</div>
+        <div id="pos_13" class="posAbs pos_abs flex_row_ccenter" style="left:4.65rem;top:7.791rem;">海口</div>
+        <div id="pos_14" class="posAbs pos_abs flex_row_ccenter" style="left:5.85rem;top:5.6610000000000005rem;">南京</div>
+        <div id="pos_15" class="posAbs pos_abs flex_row_ccenter" style="left:5.56rem;top:5.771rem;">合肥</div>
+        <div id="pos_16" class="posAbs pos_abs flex_row_ccenter" style="left:4.41rem;top:5.4910000000000005rem;">西安</div>
+        <div id="pos_17" class="posAbs pos_abs flex_row_ccenter" style="left:0.34rem;top:5.001rem;">西宁</div>
+        <div id="pos_18" class="posAbs pos_abs flex_row_ccenter" style="left:1.98rem;top:3.6310000000000002rem;">乌鲁木齐</div>
+        <div id="pos_19" class="posAbs pos_abs flex_row_ccenter" style="left:4.14rem;top:4.731rem;">银川</div>
+        <div id="pos_20" class="posAbs pos_abs flex_row_ccenter" style="left:4.94rem;top:4.891rem;">太原</div>
+        <div id="pos_21" class="posAbs pos_abs flex_row_ccenter" style="left:5.56rem;top:5.061rem;">济南</div>
+        <div id="pos_22" class="posAbs pos_abs flex_row_ccenter" style="left:5.18rem;top:4.751rem;">石家庄</div>
+        <div id="pos_23" class="posAbs pos_abs flex_row_ccenter" style="left:5.39rem;top:4.401rem;">北京</div>
+        <div id="pos_24" class="posAbs pos_abs flex_row_ccenter" style="left:5.51rem;top:4.581rem;">天津</div>
+        <div id="pos_25" class="posAbs pos_abs flex_row_ccenter" style="left:6.19rem;top:4.131rem;">沈阳</div>
+        <div id="pos_26" class="posAbs pos_abs flex_row_ccenter" style="left:6.39rem;top:3.761rem;">长春</div>
+        <div id="pos_27" class="posAbs pos_abs flex_row_ccenter" style="left:6.38rem;top:3.4010000000000002rem;">哈尔滨</div>
+        <div id="pos_28" class="posAbs pos_abs flex_row_ccenter" style="left:4.78rem;top:4.2410000000000005rem;">呼和浩特</div>
+        <div id="pos_29" class="posAbs pos_abs flex_row_ccenter" style="left:5.28rem;top:7.371rem;">香港</div>
+        <div id="pos_30" class="posAbs pos_abs flex_row_ccenter" style="left:5.05rem;top:7.461rem;">澳门</div>
+        <div id="pos_31" class="posAbs pos_abs flex_row_ccenter" style="left:6.13rem;top:5.891rem;">上海</div>
+        <div id="pos_32" class="posAbs pos_abs flex_row_ccenter" style="left:6.24rem;top:6.851rem;">台北</div>
+        <div class="posTxt pos_abs masktxt">正在测算你和家乡的距离</div>
+    </div>
+    <div class="p6 all_fix_page bkg_contain flex_column_ccenter" style="display: none; background-color: #1d022d;background-image: none">
+        <img id="pset" src="" alt="" style="display: none;">
+        <div class="cabctp bkg_contain"></div>
+        <canvas id="canvas"></canvas>
+        <div style="" class="sign gdfb signtxt">广东发布、广东人社、广东知识产权、广东交警<br>联合出品</div>
+        <div style="display: none" class="sign gzws signtxt">广州外事、广州公积金、广州消防、广州越秀发布、<br>中新广州知识城在线发布联合出品</div>
+        <div style="display: none" onclick="showShare()" class="sign djgzbtn bkg_contain gdny"></div>
+        <div style="display: none; margin-top: .2rem" class="sign gdny signtxt">广东农业 出品</div>
+        <div style="display: none" onclick="showShare()" class="sign djgzbtn bkg_contain gznx"></div>
+        <div style="display: none; margin-top: .2rem" class="sign gznx signtxt">广州女性 出品</div>
+        <div style="display: none;" class="sign dylogo txdy bkg_contain"></div>
+    </div>
+
+    <div onclick="hideShare()" class="share flex_column_ccenter all_fix_page" style="display: none">
+        <img style="display: none" class="ewm gdny" src="/static/h5/gdfbzq/images/gdnyewm.png">
+        <img style="display: none" class="ewm gznx" src="/static/h5/gdfbzq/images/gznxewm.png">
+    </div>
+
+    <div id="map" class="hide amap-container" style="position: relative;"><object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;"
+            type="text/html" data="about:blank"></object>
+        <div class="amap-maps">
+            <div class="amap-drags">
+                <div class="amap-layers"></div>
+                <div class="amap-overlays"></div>
+            </div>
+        </div>
+        <div style="display: none;"></div>
+        <div class="amap-controls">
+            <div class="amap-geolocation-con" style="position: absolute; z-index: 9999; right: 10px; bottom: 20px;">
+                <div class="amap-geo"></div>
+            </div>
+        </div><a class="amap-logo" href="http://m.amap.com" target="_blank" style="display: block;"><img src="https://webapi.amap.com/theme/v1.3/logo@2x.png"></a>
+        <div class="amap-copyright" style="display: none; visibility: visible;">
+            <!--v1.4.6--> © 2019 AutoNavi <span class="amap-mcode">- GS(2018)1709号</span></div>
+    </div>
+    <div id="music" class="on">
+        <audio id="song" loop="loop" preload="preload" style="width:0;height:0">
+            <source src="/static/h5/gdfbzq/bkg.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="upMask mask flex_column_ccenter" style="display: none">
+        <div class="masktxt">请稍等</div>
+    </div>
+    <script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <script type="text/javascript" src="/static/lib/js/bscroll.js?t=20000"></script>
+    <script type="text/javascript" src="/static/lib/swiper/swiper.min.js"></script>
+    <!--<script type="text/javascript" src="/static/h5/gdfbzq/res/index.js?t=1547086115"></script>-->
+    <script type="text/javascript" src="/static/h5/gdfbzq/js/index.js?t=1000"></script>
+    <script type="text/javascript" src="//webapi.amap.com/maps?v=1.4.8&amp;key=d34f3cfc0eb2307600296f66a1440ca4&amp;plugin=AMap.Autocomplete&amp;callback=init"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+    <script type="text/javascript">
+        var wx_title = '这一刻，你与家乡的距离是……';
+        var wx_desc = '点击生成你的思乡距离卡';
+        var img = 'http://www.gzhudu.cn//static/h5/gdfbzq/images/share.jpg?t=2000';
+        wx.config(JSON.parse(
+            '{"debug":false,"appId":"wxbeb4cda9458842b5","nonceStr":"pf2of2d96rhpfh7k","timestamp":"1547086115","signature":"c8aff6c84d731e44a0951c767192023f72a85636","jsApiList":["onWXDeviceBluetoothStateChange","onWXDeviceStateChange","openProductSpecificView","addCard","chooseCard","openCard","translateVoice","getNetworkType","openLocation","getLocation","onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone","chooseImage","previewImage","uploadImage","downloadImage","closeWindow","scanQRCode","chooseWXPay","hideOptionMenu","showOptionMenu","hideMenuItems","showMenuItems","hideAllNonBaseMenuItem","showAllNonBaseMenuItem","startScanWXDevice","stopScanWXDevice","onWXDeviceBindStateChange","onScanWXDeviceResult","onReceiveDataFromWXDevice","startRecord","stopRecord","onVoiceRecordEnd","playVoice","pauseVoice","stopVoice","onVoicePlayEnd","uploadVoice","downloadVoice","openWXDeviceLib","closeWXDeviceLib","getWXDeviceInfos","sendDataToWXDevice","disconnectWXDevice","getWXDeviceTicket","connectWXDevice"]}'
+        ));
+        wx.ready(function () {
+            //分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: wx_title, // 分享标题
+                link: window.location.href, // 分享链接
+                imgUrl: img, // 分享图标
+                success: function () {},
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            //分享给朋友
+            wx.onMenuShareAppMessage({
+                title: wx_title, // 分享标题
+                link: window.location.href, // 分享链接
+                imgUrl: img, //
+                desc: wx_desc, // 分享描述
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {},
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d8009a412a828cc423715b58a989fb94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <div class="amap-sug-result" style="visibility: hidden;"></div>
+    <div class="amap-sug-result" style="visibility: hidden;"></div>
+</body>
+
+</html>
