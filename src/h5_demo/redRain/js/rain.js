@@ -6,6 +6,9 @@ function redPack(options) {
     this.callback = options.callback; // 回调
     // this.start();
 
+
+    console.log(this.el);
+
 };
 redPack.prototype.create = function(id, amount) {
     var el = this.el,
@@ -23,6 +26,9 @@ redPack.prototype.create = function(id, amount) {
 
     fragment.appendChild(nRed);
     el.appendChild(fragment);
+
+    console.log(el);
+
     this.rains.push(nRed);
     this.move(nRed);
 
@@ -74,6 +80,7 @@ redPack.prototype.move = function(rains) {
     var This = this;
     var diffY = Math.random() + 1; // 垂直上的轻微偏移
     var diffX = Math.random(); // 水平上的轻微偏移
+ 
     rains.timer = setInterval(function() {
         if (diffY > 1.5) {
             rains.style.left = parseInt(rains.style.left) + parseInt(diffX * rains.clientHeight / 30) + "px";
