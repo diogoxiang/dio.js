@@ -1,0 +1,78 @@
+/* svg */
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15rem;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+
+// 页面布局
+.page-container {
+  padding: 10px;
+  background-color: #FFF;
+
+  // &.is-opacity {
+  //   background-color: $bgColor;
+  //   padding-right: 0;
+  // }
+
+  /* 页面顶部：按钮和搜索框 */
+  .page-top {
+    padding-bottom: 20px;
+    height: 32px;
+    line-height: 32px;
+    position: relative;
+
+    /* 左侧按钮 */
+    .buttons {}
+
+    /* 右侧搜索条件 */
+    .filters {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .filter-btn {
+        padding: 0 5px;
+        font-size: 16px;
+        color: #676E7A;
+        cursor: pointer;
+      }
+    }
+  }
+
+  /* 页面顶部：条件搜索栏 */
+  .page-search {
+    // padding-bottom: 20px;
+    transition: all 0.3s linear;
+
+    &.is-folding {
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .ui-button.search-btn {
+      padding: 0 26px;
+    }
+  }
+
+  /* 页面底部： 分页*/
+  .pagination-container {
+    padding-top: 20px;
+    text-align: right;
+  }
+
+  .page-footer {
+    padding: 20px 0;
+    text-align: right;
+  }
+}
+
+
+// 进度条颜色
+#nprogress .bar {
+  background: #fff !important;
+}

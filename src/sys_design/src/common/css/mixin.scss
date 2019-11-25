@@ -1,0 +1,48 @@
+/**
+ * 设置按钮背景色和文字颜色，按下按钮时背景色自动加深、文字自动增加透明度
+ * @param $bg-背景颜色
+ * @param [$bg=#fff]-文字颜色
+ */
+
+ @mixin button-color($bg, $fg:#fff) {
+    border-color: $bg;
+    background-color: $bg;
+    color: $fg;
+    &:hover,
+    &:focus {
+        border-color: lighten($bg, 10%);
+        background: lighten($bg, 10%);
+    }
+    &:active {
+        border-color: darken($bg, 10%);
+        background-color: darken($bg, 10%);
+        color: $fg;
+    }
+    &[disabled],&.is-disabled {
+        border-color: $bg;
+        background-color: $bg;
+        color: $fg;
+        opacity:.6;
+    }
+}
+
+// 大按钮
+.button-medium {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+}
+
+// 普通按钮
+.button-small {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+}
+
+// mini按钮
+.button-mini {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+}

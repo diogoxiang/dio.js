@@ -1,0 +1,29 @@
+/*************************** 系统 **************************/
+// 系统主颜色：包含字体，按钮背景，一些组件的hover颜色等
+$mainColor: #3380ff;
+// 背景颜色：内容区域的背景颜色
+$bgColor: #f8fbff;
+// 字体颜色: 
+$fontColor: #333;
+// 边框颜色
+$borderColor: #eaeaea;
+// 成功颜色
+$successColor: #36bb42;
+// 失败颜色
+$failureColor: #f14225;
+// 警告颜色
+$warningColor: #f1a225;
+// 提醒颜色
+$messageColor: #eaeaea;
+
+/*************************** 菜单 ****************************/
+// 背景颜色
+$menuBgColor: #fff;
+// 菜单项hover和选中时的背景颜色
+$menuHoverColor: #f4f8ff;
+// 文字颜色
+$menuTextColor: $fontColor;
+
+/*************************** banner **************************/
+// 头部栏banner的高度
+$bannerHeight: 60px;

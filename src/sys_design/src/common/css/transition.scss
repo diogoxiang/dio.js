@@ -1,0 +1,30 @@
+.slide-enter-active {
+    animation-name: slideInUp;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+.slide-leave-active {
+    animation-name: slideOutDown;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+@keyframes slideInUp {
+    0% {
+        transform: translateY(100%);
+        visibility: visible;
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+@keyframes slideOutDown {
+    0% {
+        transform: translateY(0);
+    }
+
+    to {
+        visibility: hidden;
+        transform: translateY(100%);
+    }
+}

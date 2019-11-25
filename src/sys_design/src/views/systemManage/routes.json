@@ -1,0 +1,33 @@
+{
+    "roleManage": {
+        "title": "角色管理",
+        "icon": "jiaoseguanli",
+        "path": "roleManage/rolesList"
+    },
+    "setRoleMenus": {
+        "title": "设置角色菜单信息",
+        "hidden": true,
+        "path": "roleManage/setRoleMenus"
+    },
+    "userManage": {
+        "title": "用户管理",
+        "icon": "yonghuguanli",
+        "path": "userManage/usersList",
+        "cache": true
+    },
+    "userConfig": {
+        "title": "用户编辑",
+        "hidden": true,
+        "path": "userManage/userConfig"
+    },
+    "setUserRoles": {
+        "title": "设置用户角色信息",
+        "hidden": true,
+        "path": "userManage/setUserRoles"
+    },
+    "menuManage": {
+        "title": "菜单管理",
+        "icon": "caidanguanli",
+        "path": "menuManage/menusList"
+    }
+}

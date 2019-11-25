@@ -1,0 +1,49 @@
+.v-modal {
+    background: rgba(0, 0, 0, .05) !important;
+}
+
+.el-message-box.ui-message-box {
+    border-color: #E2EDFF;
+    border-radius: 0;
+    padding: 24px;
+    .el-message-box__header {
+        padding: 0;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+        .el-message-box__headerbtn {
+            top: 0;
+            right: 0;
+        }
+    }
+    .el-message-box__content {
+        padding: 25px 0 0;
+        .el-message-box__message {
+            padding-bottom: 9px;
+        }
+        .el-message-box__input {
+            padding: 0;
+            .el-input__inner {
+                border-radius: 0;
+                border-color: #EAEAEA;
+            }
+        }
+    }
+    .el-message-box__btns {
+        padding: 30px 0 0;
+        .el-button {
+            border-radius: 0;
+            padding-left: 26px;
+            padding-right: 26px;
+            &.confirm-button {
+                background-color: $mainColor;
+                border-color: $mainColor;
+            }
+            &.cancel-button {
+                background-color: #F4F8FF;
+                border-color: #F4F8FF;
+                color: #999999;
+            }
+        }
+    }
+}

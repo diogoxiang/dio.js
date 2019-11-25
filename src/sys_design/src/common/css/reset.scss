@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+}
+
+html, body {
+    height: 100%;
+    font-size: 12px;
+    -webkit-font-smoothing:none; // 无抗锯齿
+    -webkit-font-smoothing: subpixel-antialiased; //次像素平滑(默认，用这个值就可以解决问题）
+    -webkit-font-smoothing: antialiased; // 灰度平滑
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul, li {
+    list-style: none;
+}
+
+input {
+    -webkit-appearance: none;
+}
+
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected {
+    font-size: 14px;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
