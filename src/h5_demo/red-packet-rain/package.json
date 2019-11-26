@@ -20,7 +20,7 @@
     "open-browser-webpack-plugin": "^0.0.3",
     "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "~1.14.1"
+    "webpack-dev-server": "~3.1.11"
   },
   "repository": {
     "type": "git",
