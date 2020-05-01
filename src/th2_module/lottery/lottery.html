@@ -1,0 +1,116 @@
+<!--
+    @require "lottery.js"
+-->
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>举手之劳，码上回馈</title>
+    <link rel="import" href="../tpl/header/header.html?__inline">
+</head>
+
+<body>
+    <div id="app" class="c-wrap lottery-wrap cbg-color" :style="{ height: screenH + 'px' }" v-cloak>
+        <div class="cf-wrap cbg-color c_h100 bfc">
+
+            <div class="lottery-head">
+
+                <div class="rule-btn pull-left">
+                    <img src="../images/text@2x.png" alt="">
+                </div>
+                <div class="rule-btn pull-right">
+                    <img src="../images/rule@2x.png" alt="">
+                </div>
+            </div>
+
+            <div class="c_w100">
+                <div class="lottery-pan-box fn-mtauto" v-cloak>
+                    <div class="plate-pan">
+                        <div class="prize-plate" v-if="lotteryArr.length>0">
+                            <div class="lottery1 lottery-item">
+                                <div class="one-line">{{lotteryArr[0].prizeName}}</div>
+                                <img v-if="lotteryArr[0].logoUrl" :src="lotteryArr[0].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+                            <div class="lottery2 lottery-item">
+                                <div class="one-line">{{lotteryArr[1].prizeName}}</div>
+                                <img v-if="lotteryArr[1].logoUrl" :src="lotteryArr[1].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+                            <div class="lottery3 lottery-item">
+                                <div class="one-line">{{lotteryArr[2].prizeName}}</div>
+                                <img v-if="lotteryArr[2].logoUrl" :src="lotteryArr[2].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+                            <div class="lottery4 lottery-item">
+                                <div class="one-line">{{lotteryArr[3].prizeName}}</div>
+                                <img v-if="lotteryArr[3].logoUrl" :src="lotteryArr[3].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+                            <div class="lottery5 lottery-item">
+                                <div class="one-line">{{lotteryArr[4].prizeName}}</div>
+                                <img v-if="lotteryArr[4].logoUrl" :src="lotteryArr[4].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+                            <div class="lottery6 lottery-item">
+                                <div class="one-line">{{lotteryArr[5].prizeName}}</div>
+                                <img v-if="lotteryArr[5].logoUrl" :src="lotteryArr[5].logoUrl" alt="">
+                                <img v-else src="../images/luck_ico.png" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <transition name="fastopacity">
+                        <div class="zhizhen" v-show="actionTime==1">
+                            <!-- 指针 -->
+                            <div class="c_w100 c_h100">
+                                <div class="start-btn pos_abs c_w100 text-center"
+                                    v-bind:class="{'start-btn-big':lotteryPoint>=1000}" @click="gamestart">
+                                    <div class="colorwhite txt14">抽奖</div>
+                                    <!-- <div>({{lotteryPoint}}积分/次)</div> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </transition>
+                    <transition name="fastopacity">
+                        <div class="zhizhen-gray" v-show="actionTime==2">
+                            <!-- 活动已结束 -->
+                        </div>
+                    </transition>
+                </div>
+
+            </div>
+            <!-- laba -->
+            <div class="c_w100 fn-mb10">
+                    <div class="otips c_w80 fn-mtauto">
+                        
+                        <div class="la-icon inlineblock"></div>
+                        <div class="otips-txt inlineblock smokeWhite">
+                            <vue-marquee :scroll-win="scrollWin" :time-text="timeText"></vue-marquee>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="lo-btn c_w50 fn-mtauto">
+                <div class="btn c_w100 c333 text-center txtBolder">
+                    立即抽奖
+                </div>
+            </div>
+
+            <div class="text-center colorwhite">
+                可用抽奖机会:1
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</body>
+
+
+</html>

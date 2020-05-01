@@ -1,0 +1,291 @@
+@charset "UTF-8";
+.lottery-wrap .cf-wrap {
+  background: url("images/cj-bg@2x.png") top center no-repeat;
+  background-size: 100% 100%;
+}
+
+.lottery-wrap .lottery-head {
+  height: 20%;
+  padding-top: 0.7rem;
+}
+
+.lottery-wrap .rule-btn {
+  width: 5rem;
+}
+
+.lottery-pan-box {
+  height: 17.5rem;
+  width: 17.5rem;
+  padding: 3vw;
+  position: relative;
+}
+
+.lottery-pan-box .plate-pan {
+  height: 100%;
+  width: 100%;
+  background: url("images/cj-pan@2x.png") no-repeat center;
+  background-size: 100% 100%;
+}
+
+.lottery-pan-box .prize-plate {
+  height: 100%;
+  width: 100%;
+  background: url("images/cj-pan2@2x.png") no-repeat center;
+  background-size: 86% 86%;
+  position: relative;
+}
+
+.lottery-pan-box .prize-plate .lottery-item {
+  width: 14vw;
+  color: #49a025;
+  font-size: 0.6rem;
+  font-weight: 900;
+  display: box;
+  /* OLD - Android 4.4- */
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* 09版 */
+  -webkit-box-pack: center;
+  /* 12版 */
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  /* 09版 */
+  -webkit-box-align: center;
+  /* 12版 */
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  /* 09版 */
+  -webkit-box-orient: vertical;
+  /* 12版 */
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+
+.lottery-pan-box .prize-plate .lottery-item img {
+  max-width: 10vw;
+  height: 9.5vw;
+}
+
+.lottery-pan-box .prize-plate .lottery-item .one-line {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  /*超出部分隐藏*/
+  white-space: nowrap;
+  font-size: 0.55rem;
+  /*不换行*/
+  /*超出部分文字以...显示*/
+}
+
+.lottery-pan-box .prize-plate .lottery1 {
+  position: absolute;
+  top: 17.5%;
+  left: 43%;
+  transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  /* IE 9 */
+  -moz-transform: rotate(0deg);
+  /* Firefox */
+  -webkit-transform: rotate(0deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(0deg);
+}
+
+.lottery-pan-box .prize-plate .lottery2 {
+  position: absolute;
+  top: 31%;
+  left: 63%;
+  transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  /* IE 9 */
+  -moz-transform: rotate(60deg);
+  /* Firefox */
+  -webkit-transform: rotate(60deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(60deg);
+}
+
+.lottery-pan-box .prize-plate .lottery3 {
+  position: absolute;
+  top: 55%;
+  left: 64%;
+  transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  /* IE 9 */
+  -moz-transform: rotate(120deg);
+  /* Firefox */
+  -webkit-transform: rotate(120deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(120deg);
+}
+
+.lottery-pan-box .prize-plate .lottery4 {
+  position: absolute;
+  top: 67%;
+  left: 43%;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  /* IE 9 */
+  -moz-transform: rotate(180deg);
+  /* Firefox */
+  -webkit-transform: rotate(180deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(180deg);
+}
+
+.lottery-pan-box .prize-plate .lottery5 {
+  position: absolute;
+  top: 55%;
+  left: 23%;
+  transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  /* IE 9 */
+  -moz-transform: rotate(240deg);
+  /* Firefox */
+  -webkit-transform: rotate(240deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(240deg);
+}
+
+.lottery-pan-box .prize-plate .lottery6 {
+  position: absolute;
+  top: 30%;
+  left: 21%;
+  transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  /* IE 9 */
+  -moz-transform: rotate(300deg);
+  /* Firefox */
+  -webkit-transform: rotate(300deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(300deg);
+}
+
+.lottery-pan-box .prize-plate .lottery7 {
+  position: absolute;
+  top: 32%;
+  left: 17%;
+  transform: rotate(292.5deg);
+  -ms-transform: rotate(292.5deg);
+  /* IE 9 */
+  -moz-transform: rotate(292.5deg);
+  /* Firefox */
+  -webkit-transform: rotate(292.5deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(292.5deg);
+}
+
+.lottery-pan-box .prize-plate .lottery8 {
+  position: absolute;
+  top: 17.5%;
+  left: 31.5%;
+  transform: rotate(337.5deg);
+  -ms-transform: rotate(337.5deg);
+  /* IE 9 */
+  -moz-transform: rotate(337.5deg);
+  /* Firefox */
+  -webkit-transform: rotate(337.5deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(337.5deg);
+}
+
+.lottery-pan-box .zhizhen-gray {
+  height: 94vw;
+  width: 94vw;
+  background: url("images/actionOver.png") no-repeat center;
+  background-size: 100% 100%;
+  position: absolute;
+  left: 3vw;
+  top: 3vw;
+}
+
+.lottery-pan-box .zhizhen {
+  height: 62%;
+  width: 48%;
+  background: url("images/cj-zhen@2x.png") no-repeat center;
+  background-size: 100% 100%;
+  position: absolute;
+  left: 26%;
+  top: 2%;
+  display: box;
+  /* OLD - Android 4.4- */
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* 09版 */
+  -webkit-box-pack: center;
+  /* 12版 */
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  /* 09版 */
+  -webkit-box-align: center;
+  /* 12版 */
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
+
+.lottery-pan-box .zhizhen .start-btn {
+  font-weight: 900;
+  color: #7f5406;
+  bottom: 2rem;
+}
+
+.lottery-pan-box .zhizhen .start-btn-big {
+  font-size: 0.6rem;
+}
+
+.otips {
+  background: rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  height: 1.5rem;
+  overflow: hidden;
+}
+
+.otips .la-icon {
+  width: 8%;
+  height: 1.5rem;
+  background: url("images/laba@2x.png") center no-repeat;
+  background-size: 80%;
+  line-height: 1.4;
+}
+
+.otips .otips-txt {
+  width: 90%;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.lo-btn .btn {
+  height: 2rem;
+  line-height: 1.5rem;
+  background: url("images/lobtn@2x.png") center no-repeat;
+  background-size: 100% 100%;
+}

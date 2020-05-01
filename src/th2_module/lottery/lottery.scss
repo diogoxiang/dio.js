@@ -1,0 +1,310 @@
+ 
+
+// pixels to rems
+@function pxToRem($px) {
+    @return $px / 20 * 1rem;
+}
+@function ptr($px) {
+    @return $px / 20 * 1rem;
+}
+
+
+.lottery-wrap {
+  .cf-wrap {
+    background: url("images/cj-bg@2x.png") top center no-repeat;
+    background-size: 100% 100%;
+  }
+  .lottery-head {
+    height: 20%;
+    padding-top: ptr(14);
+  }
+  .rule-btn {
+    width: ptr(100);
+  }
+}
+
+.lottery-pan-box {
+  height: ptr(350);
+  width: ptr(350);
+  //   margin-top: 35vw;
+  padding: 3vw;
+  position: relative;
+  .plate-pan {
+    height: 100%;
+    width: 100%;
+    background: url("images/cj-pan@2x.png") no-repeat center;
+    background-size: 100% 100%;
+    // padding-top: 5%;
+  }
+  .prize-plate {
+    height: 100%;
+    width: 100%;
+    background: url("images/cj-pan2@2x.png") no-repeat center;
+    background-size: 86% 86%;
+    position: relative;
+    // margin-left: 5%;
+
+    .lottery-item {
+      width: 14vw;
+      color: #49a025;
+      font-size: pxToRem(12);
+      font-weight: 900;
+      display: box;
+      /* OLD - Android 4.4- */
+      display: -webkit-box;
+      /* OLD - iOS 6-, Safari 3.1-6 */
+      display: -moz-box;
+      /* OLD - Firefox 19- (buggy but mostly works) */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      /* NEW - Chrome */
+      display: flex;
+      /* 09版 */
+      -webkit-box-pack: center;
+      /* 12版 */
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      -o-justify-content: center;
+      justify-content: center;
+      /* 09版 */
+      -webkit-box-align: center;
+      /* 12版 */
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      /* 09版 */
+      -webkit-box-orient: vertical;
+      /* 12版 */
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      -ms-flex-direction: column;
+      -o-flex-direction: column;
+      flex-direction: column;
+
+      img {
+        max-width: 10vw;
+        height: 9.5vw;
+      }
+      .one-line {
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        /*超出部分隐藏*/
+        white-space: nowrap;
+        font-size: pxToRem(11);
+        /*不换行*/
+        // text-overflow: ellipsis;
+        /*超出部分文字以...显示*/
+      }
+    }
+
+    .lottery1 {
+      position: absolute;
+      top: 17.5%;
+      left: 43%;
+      transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      -moz-transform: rotate(0deg);
+      /* Firefox */
+      -webkit-transform: rotate(0deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(0deg);
+    }
+
+    .lottery2 {
+      position: absolute;
+      top: 31%;
+      left: 63%;
+      transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+      /* IE 9 */
+      -moz-transform: rotate(60deg);
+      /* Firefox */
+      -webkit-transform: rotate(60deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(60deg);
+    }
+
+    .lottery3 {
+      position: absolute;
+      top: 55%;
+      left: 64%;
+      transform: rotate(120deg);
+      -ms-transform: rotate(120deg);
+      /* IE 9 */
+      -moz-transform: rotate(120deg);
+      /* Firefox */
+      -webkit-transform: rotate(120deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(120deg);
+    }
+
+    .lottery4 {
+      position: absolute;
+      top: 67%;
+      left: 43%;
+      transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      /* IE 9 */
+      -moz-transform: rotate(180deg);
+      /* Firefox */
+      -webkit-transform: rotate(180deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(180deg);
+    }
+
+    .lottery5 {
+      position: absolute;
+      top: 55%;
+      left: 23%;
+      transform: rotate(240deg);
+      -ms-transform: rotate(240deg);
+      /* IE 9 */
+      -moz-transform: rotate(240deg);
+      /* Firefox */
+      -webkit-transform: rotate(240deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(240deg);
+    }
+
+    .lottery6 {
+      position: absolute;
+      top: 30%;
+      left: 21%;
+      transform: rotate(300deg);
+      -ms-transform: rotate(300deg);
+      /* IE 9 */
+      -moz-transform: rotate(300deg);
+      /* Firefox */
+      -webkit-transform: rotate(300deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(300deg);
+    }
+
+    .lottery7 {
+      position: absolute;
+      top: 32%;
+      left: 17%;
+      transform: rotate(292.5deg);
+      -ms-transform: rotate(292.5deg);
+      /* IE 9 */
+      -moz-transform: rotate(292.5deg);
+      /* Firefox */
+      -webkit-transform: rotate(292.5deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(292.5deg);
+    }
+
+    .lottery8 {
+      position: absolute;
+      top: 17.5%;
+      left: 31.5%;
+      transform: rotate(337.5deg);
+      -ms-transform: rotate(337.5deg);
+      /* IE 9 */
+      -moz-transform: rotate(337.5deg);
+      /* Firefox */
+      -webkit-transform: rotate(337.5deg);
+      /* Safari 和 Chrome */
+      -o-transform: rotate(337.5deg);
+    }
+
+    // @for $i from 1 through 10 {
+    //     .lottery#{$i} {
+    //         height: $i * 10%;
+    //     }
+
+    // }
+  }
+
+  .zhizhen-gray {
+    height: 94vw;
+    width: 94vw;
+    background: url("images/actionOver.png") no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 3vw;
+    top: 3vw;
+  }
+
+  .zhizhen {
+    height: 62%;
+    width: 48%;
+    background: url("images/cj-zhen@2x.png") no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 26%;
+    top: 2%;
+    display: box;
+    /* OLD - Android 4.4- */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* 09版 */
+    -webkit-box-pack: center;
+    /* 12版 */
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    /* 09版 */
+    -webkit-box-align: center;
+    /* 12版 */
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+
+    .start-btn {
+      // font-size: pxToRem(12);
+
+      font-weight: 900;
+      color: #7f5406;
+      bottom: ptr(40);
+    }
+    .start-btn-big {
+      font-size: pxToRem(12);
+    }
+  }
+}
+
+.otips {
+  background: rgba($color: #000000, $alpha: 0.1);
+  line-height: 1;
+  height: ptr(30);
+  overflow: hidden;
+  .la-icon {
+    width: 8%;
+    height: ptr(30);
+    background: url("images/laba@2x.png") center no-repeat;
+    background-size: 80% ;
+    line-height: 1.4;
+  }
+  .otips-txt {
+    width: 90%;
+    height: ptr(30);
+    line-height: ptr(30);
+  }
+}
+
+.lo-btn {
+  .btn {
+    height: ptr(40);
+    line-height: ptr(30);
+    background: url("images/lobtn@2x.png") center no-repeat;
+    background-size: 100% 100%;
+  }
+}
