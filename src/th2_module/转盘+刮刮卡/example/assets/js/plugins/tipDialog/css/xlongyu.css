@@ -1,0 +1,144 @@
+/*---弹窗提示相关---*/
+.tipDialogMasker{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+}
+.tipDialog-00{
+    display: none;
+    width: 86%;
+    min-width: 200px;
+    max-height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    font-size: 1.1em;
+    background: rgba(243, 243, 243, 0.96);
+    padding: 15px;
+    text-align: center;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    z-index: 10001;
+}
+.tipDialog-00 .close{ display:none; }
+.tipDialog-00 .tipType{
+    display: none;
+    width:48px;
+    height:48px;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: left top;
+    overflow: hidden;
+    position: relative;
+}
+.tipDialog-00 .tipTitle{
+    display: block;
+    height: 40px;
+    display: none;
+    line-height: 40px;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin: 8px auto;
+    color: #000;
+}
+.tipDialog-00 .tipContent{
+    color: rgb(30, 30, 30);
+    font-size: 1.0em;
+    font-weight: normal;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 24px;
+    padding: 10px 0 10px 0;
+    text-align: left;
+}
+.tipDialog-00 .tipBtns{
+    margin: 0;
+    border-top: solid 1px #CCC;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    padding-top: 15px;
+}
+.tipDialog-00 .tipBtns span{
+    display: inline-block;
+    height: 36px;
+    line-height: 35px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #6A6A6A;
+    width: 45%;
+    float: left;
+    background-color: rgba(250, 250, 250, 0.6);
+    border-radius: 3px;
+}
+.tipDialog-00 .tipBtns span:hover{
+    background: rgba(220,220,220,.6);
+}
+.tipDialog-00 .tipBtns span.btnOk{
+    width: 45%;
+    /*border-right:solid 1px #CCC;*/
+}
+.tipDialog-00 .tipBtns span.btnCancel{
+    float: left;
+}
+.tipDialog-00 .tipBtns span.btmRRadius{
+    /*-webkit-border-bottom-right-radius: 6px;
+    border-bottom-right-radius: 6px;*/
+}
+.tipDialog-00 .tipBtns span.btmLRadius{
+    /*-webkit-border-bottom-left-radius: 6px;
+    border-bottom-left-radius: 6px;*/
+}
+.tipDialog-00 .tipBtns span.btmRadius{
+    /*-webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;*/
+}
+.tipDialog-00 .tipBtns span.betweenOk{
+    /*border-left: solid 1px #CCC;*/
+    width: 45%;
+    float: right;
+    background-color: #FFD200;
+    color: rgb(151, 76, 3);
+}
+.tipDialog-00 .tipBtns span.betweenCancel{
+    width: 45%;
+    border: solid 1px #CDCDCD;
+    background-color: white;
+}
+.tipDialog-00 .tipBtns span.showOk{
+    border-left: none;
+    width: 100%;
+}
+.tipDialog-00 .tipBtns span.showCancel{
+    border-right: none;
+    width: 100%;
+}
+.tipDialog-00 .tipDialog-msg-span {
+    color: rgb(162, 99, 42);
+    text-align: center;
+}
+.tipDialog-00 .tipDialog-msg-span > span{
+    font-size: 1.15em;
+    display: block;
+    text-align: center;
+}
+.tipDialog-00 .tipDialog-msg-span > em{
+    font-size: .9em;
+    font-style: normal;
+    color: rgb(170, 170, 170);
+    text-align: center;
+}

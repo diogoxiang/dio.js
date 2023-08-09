@@ -193,22 +193,23 @@ data: {
 2、避免使用!important
 3、选择器顺序尽量与html结构的顺序保持一致
 4、属性声明顺序，遵循先布局后样式，参考顺序：定位→布局→盒子→尺寸→表现，特殊地，伪类元素的content应放于最前面
->定位属性包括：position（包括top、right、bottom、left、z-index）、float、clear，
->布局属性包括：display（包括vertical-align、盒子布局的flex-direction、align-items）、overflow，
->盒子属性包括：box-sizing、margin、padding、border，
->尺寸属性包括：width、height、line-height，
->表现属性包括：transform、font、color、background、transition、content等等
+  >定位属性包括：position（包括top、right、bottom、left、z-index）、float、clear，
+  >布局属性包括：display（包括vertical-align、盒子布局的flex-direction、align-items）、overflow，
+  >盒子属性包括：box-sizing、margin、padding、border，
+  >尺寸属性包括：width、height、line-height，
+  >表现属性包括：transform、font、color、background、transition、content等等
 
 ###2)scss规范
 1、要求使用嵌套选择器，嵌套缩进一个tab（4个空格）长度
 2、变量、宏、继承、占位符统一使用`-`分隔短语
 3、选择器顺序遵循先结构后声明，参考顺序：
->1、当前选择器属性
->2、伪类元素
->3、子选择器
->4、伪类
->5、声明样式
-```scss
+  >1、当前选择器属性
+  >2、伪类元素
+  >3、子选择器
+  >4、伪类
+  >5、声明样式
+
+```css
 .ui-checkbox {
     position: relative;
     background-color:#fff;
@@ -247,7 +248,7 @@ data: {
     }
 }
 ```
-***
+
 
 
 ##5、js规范
@@ -278,9 +279,9 @@ let msg = `金额必须在${min}和${max}之内！`;
 1、html节点属性顺序：指令→属性→class→事件
 ```html
 <v-button
-        v-for="(item,i) in list" 
-        :key="item" :icon="item.icon" 
-        class="my-cls" 
+        v-for="(item,i) in list"
+        :key="item" :icon="item.icon"
+        class="my-cls"
         @click="onClick(i)">
 </v-button>
 ```
@@ -288,13 +289,13 @@ let msg = `金额必须在${min}和${max}之内！`;
 	vm、childVm
 3、使用$refs访问节点
 4、vue属性顺序遵循：引用→属性→方法：
->1. components
->2. filters
->3. props
->4. data
->5. computed
->6. watch
->7. metods
->8. beforeCreate、created、mounted等生命周期函数
+  >1. components
+  >2. filters
+  >3. props
+  >4. data
+  >5. computed
+  >6. watch
+  >7. metods
+  >8. beforeCreate、created、mounted等生命周期函数
 
 5、props、data、computed、methods的属性按字母顺序编写
